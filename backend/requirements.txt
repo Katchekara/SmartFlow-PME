@@ -1,0 +1,20 @@
+# Backend & API
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+
+# Base de données
+sqlalchemy==2.0.30
+
+# IA & Machine Learning
+numpy
+pandas
+scikit-learn
+joblib
+
+# Deep Learning (optionnel)
+torch
+torchvision
+
+# Tests
+pytest
+httpx
