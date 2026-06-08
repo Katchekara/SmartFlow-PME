@@ -147,3 +147,4 @@ probabilite = modele.predict_proba(pme_test)[0]
 
 print(f"Décision : {'✅ Crédit ACCORDÉ' if resultat == 1 else '❌ Crédit REFUSÉ'}")
 print(f"Probabilité d'accord : {probabilite[1]*100:.1f}%")
+

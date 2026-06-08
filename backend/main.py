@@ -5,6 +5,8 @@ from sqlalchemy.orm import declarative_base, sessionmaker, Session, relationship
 from sklearn.ensemble import IsolationForest
 import numpy as np
 from datetime import datetime
+from backend.routes import clients, transactions, credits, fraud
+
 
 # --- Config DB SQLite ---
 DATABASE_URL = "sqlite:///./smartflow.db"
