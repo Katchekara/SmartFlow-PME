@@ -5,11 +5,11 @@
 # ============================================
 
 from fastapi import FastAPI
-from database.db import engine
-from database.schema import Base
+from backend.database.db import engine
+from backend.database.schema import Base
+from backend.routes import clients, transactions, credits, fraud, chatbot
 
-# Importer les routes
-from routes import clients, transactions, credits, fraud
+
 
 # Créer les tables en base
 Base.metadata.create_all(bind=engine)
@@ -26,6 +26,7 @@ app.include_router(clients.router)
 app.include_router(transactions.router)
 app.include_router(credits.router)
 app.include_router(fraud.router)
+app.include_router(chatbot.router)
 
 @app.get("/")
 def root():

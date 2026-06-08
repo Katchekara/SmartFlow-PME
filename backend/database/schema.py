@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from backend.database.db import Base
+from .db import Base   # ← CORRECT
+
 
 class Client(Base):
     __tablename__ = "clients"

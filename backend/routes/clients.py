@@ -1,10 +1,13 @@
+from pydantic import BaseModel
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
 from backend.database.db import get_db
 from backend.database.schema import Client
 
 router = APIRouter(prefix="/clients", tags=["Clients"])
+
+
+
 
 class ClientCreate(BaseModel):
     nom:               str
@@ -21,7 +24,7 @@ def create_client(client: ClientCreate, db: Session = Depends(get_db)):
     return db_client
 
 @router.get("/")
-def list_clients(db: Session = Depends(get_db)):
+def get_clients(db: Session = Depends(get_db)):
     return db.query(Client).all()
 
 @router.get("/{client_id}")
