@@ -5,10 +5,11 @@
 # ============================================
 
 from fastapi import FastAPI
-from backend.database.db import engine, Base
+from database.db import engine
+from database.schema import Base
 
 # Importer les routes
-from backend.routes import clients, transactions, credits, fraud
+from routes import clients, transactions, credits, fraud
 
 # Créer les tables en base
 Base.metadata.create_all(bind=engine)
@@ -29,10 +30,10 @@ app.include_router(fraud.router)
 @app.get("/")
 def root():
     return {
-        "message":    "✅ SmartFlow PME API opérationnelle",
-        "version":    "1.0.0",
-        "docs":       "/docs",
-        "equipe":     [
+        "message": "✅ SmartFlow PME API opérationnelle",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "equipe": [
             "OUEDRAOGO Kevin — Chef de Projet",
             "TAONDEYANDE Wendmanegda Jean-Claude — IA"
         ]
