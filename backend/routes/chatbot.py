@@ -2,9 +2,14 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from backend.database.db import get_db
-from backend.database.schema import Client, Credit, Alerte   # <-- ajout des modèles manquants
+from backend.database.schema import Client, Credit, Alerte
 import requests
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement depuis .env
+load_dotenv()
 
 router = APIRouter(prefix="/chatbot", tags=["Chatbot"])
 
@@ -13,11 +18,13 @@ class ChatMessage(BaseModel):
     text: str
 
 # Hugging Face API config
-HF_TOKEN = "***REMOVED***"  # <-- ton vrai token
+HF_TOKEN = os.getenv("HF_TOKEN")   # récupéré depuis .env
 API_URL = "https://api-inference.huggingface.co/models/bert-base-uncased"
-headers = {"Authorization": f"Bearer {HF_TOKEN}"}  # <-- correction : HEADERS → headers
+headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
 
 def query_hf(user_input: str):
+    if not HF_TOKEN:
+        return {"error": "Token Hugging Face introuvable"}
     response = requests.post(API_URL, headers=headers, json={"inputs": user_input})
     return response.json()
 
