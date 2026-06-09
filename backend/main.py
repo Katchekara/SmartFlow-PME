@@ -7,7 +7,8 @@
 from fastapi import FastAPI
 from backend.database.db import engine
 from backend.database.schema import Base
-from backend.routes import clients, transactions, credits, fraud, chatbot
+from backend.routes import clients, transactions, credits, fraud, chatbot, ia
+
 
 
 
@@ -27,6 +28,7 @@ app.include_router(transactions.router)
 app.include_router(credits.router)
 app.include_router(fraud.router)
 app.include_router(chatbot.router)
+app.include_router(ia.router)
 
 @app.get("/")
 def root():
