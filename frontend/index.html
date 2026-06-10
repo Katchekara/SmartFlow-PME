@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartFlow PME — IA Financière pour PME Africaines</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg:      #0D0D0D;
+      --bg2:     #1A1A1A;
+      --bg3:     #242424;
+      --border:  #2E2E2E;
+      --orange:  #FF6B2B;
+      --green:   #2ECC71;
+      --blue:    #3B82F6;
+      --red:     #EF4444;
+      --yellow:  #F59E0B;
+      --text:    #F0F0F0;
+      --text2:   #A0A0A0;
+      --white:   #ffffff;
+    }
+    body { font-family:'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+    /* NAV */
+    nav {
+      background:var(--bg2); border-bottom:1px solid var(--border);
+      padding:0 1.5rem; display:flex; align-items:center;
+      justify-content:space-between; height:60px;
+      position:sticky; top:0; z-index:100;
+    }
+    .nav-logo { color:var(--white); font-size:1.3rem; font-weight:800; }
+    .nav-logo span { color:var(--orange); }
+    .nav-links { display:flex; gap:0.3rem; flex-wrap:wrap; }
+    .nav-links button {
+      background:transparent; border:none; color:var(--text2);
+      padding:0.45rem 0.8rem; border-radius:7px; cursor:pointer;
+      font-size:0.82rem; transition:all 0.2s;
+    }
+    .nav-links button:hover { background:var(--bg3); color:var(--text); }
+    .nav-links button.active { background:var(--orange); color:var(--white); }
+
+    /* PAGES */
+    .page { display:none; padding:1.5rem; max-width:1100px; margin:0 auto; }
+    .page.active { display:block; animation:fadeIn 0.3s ease; }
+
+    /* HERO */
+    .hero {
+      background:linear-gradient(135deg,#1A1A2E,#0F3460);
+      border:1px solid #2a3a5c; border-radius:14px;
+      padding:3rem 2rem; text-align:center; margin-bottom:1.5rem;
+    }
+    .hero h1 { font-size:2.5rem; font-weight:800; margin-bottom:0.8rem; }
+    .hero h1 span { color:var(--orange); }
+    .hero p { color:var(--text2); margin-bottom:1.8rem; line-height:1.6; }
+    .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    /* BUTTONS */
+    .btn { padding:0.7rem 1.6rem; border-radius:8px; border:none; cursor:pointer; font-size:0.92rem; font-weight:600; transition:all 0.2s; }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,107,43,0.25); }
+    .btn-primary { background:var(--orange); color:var(--white); }
+    .btn-secondary { background:transparent; color:var(--text); border:1.5px solid var(--border); }
+    .btn-secondary:hover { border-color:var(--orange); color:var(--orange); box-shadow:none; }
+    .btn-sm { padding:0.4rem 1rem; font-size:0.82rem; }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-size:1.1rem; font-weight:700; color:var(--text);
+      margin-bottom:1rem; padding-bottom:0.5rem;
+      border-bottom:1px solid var(--border);
+    }
+    .subsection { font-size:0.9rem; font-weight:600; color:var(--orange); margin:1.2rem 0 0.8rem; }
+
+    /* CARDS */
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:1.5rem; }
+    .card {
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:12px; padding:1.3rem; transition:all 0.2s;
+    }
+    .card:hover { border-color:var(--orange); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.4); }
+    .card-icon { font-size:1.6rem; margin-bottom:0.6rem; }
+    .card h3 { font-size:0.75rem; color:var(--text2); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.3rem; }
+    .card .card-value { font-size:1.8rem; font-weight:800; color:var(--orange); }
+    .card p { font-size:0.8rem; color:var(--text2); margin-top:0.3rem; line-height:1.4; }
+
+    /* FORM */
+    .form-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:1.8rem; margin-bottom:1.5rem; }
+    .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+    .form-group { display:flex; flex-direction:column; gap:0.35rem; }
+    .form-group label { font-size:0.78rem; font-weight:600; color:var(--text2); text-transform:uppercase; letter-spacing:0.4px; }
+    .form-group input, .form-group select {
+      padding:0.65rem 0.9rem; background:var(--bg3);
+      border:1.5px solid var(--border); border-radius:8px;
+      font-size:0.9rem; color:var(--text); outline:none; transition:border 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color:var(--orange); }
+    .form-group input::placeholder { color:#444; }
+    .form-group select option { background:var(--bg3); }
+    .form-submit { margin-top:1.3rem; text-align:center; }
+
+    /* RESULT */
+    .result-box { border-radius:12px; padding:1.3rem; margin-top:1.3rem; display:none; animation:fadeIn 0.4s ease; }
+    .result-box.success { background:rgba(46,204,113,0.1); border:1.5px solid var(--green); }
+    .result-box.danger  { background:rgba(239,68,68,0.1);  border:1.5px solid var(--red); }
+    .result-box.warning { background:rgba(245,158,11,0.1); border:1.5px solid var(--yellow); }
+    .result-box.show { display:block; }
+    .result-title { font-size:1.15rem; font-weight:700; margin-bottom:0.5rem; }
+    .result-detail { font-size:0.9rem; color:var(--text2); line-height:1.7; }
+
+    /* STATS */
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-bottom:1.5rem; }
+    .stat-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:1.1rem; text-align:center; transition:border 0.2s; }
+    .stat-card:hover { border-color:var(--orange); }
+    .stat-card .stat-val { font-size:2rem; font-weight:800; color:var(--orange); }
+    .stat-card .stat-label { font-size:0.78rem; color:var(--text2); margin-top:0.2rem; }
+
+    /* TABLE */
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:0.86rem; }
+    th { background:var(--bg3); color:var(--text2); padding:0.7rem 0.9rem; text-align:left; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border); }
+    td { padding:0.7rem 0.9rem; border-bottom:1px solid var(--border); color:var(--text); }
+    tr:hover td { background:var(--bg3); }
+    .badge { padding:0.22rem 0.65rem; border-radius:20px; font-size:0.75rem; font-weight:600; }
+    .badge-green  { background:rgba(46,204,113,0.15); color:var(--green); }
+    .badge-red    { background:rgba(239,68,68,0.15);  color:var(--red); }
+    .badge-orange { background:rgba(255,107,43,0.15); color:var(--orange); }
+    .badge-yellow { background:rgba(245,158,11,0.15); color:var(--yellow); }
+
+    /* LOADING */
+    .loading { display:none; text-align:center; padding:1.5rem; color:var(--text2); }
+    .spinner { width:26px; height:26px; border:3px solid var(--border); border-top:3px solid var(--orange); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 0.5rem; }
+
+    /* ALERT ITEMS */
+    .alert-item { background:var(--bg2); border:1px solid var(--border); border-left:4px solid var(--red); border-radius:10px; padding:1rem 1.3rem; margin-bottom:0.8rem; }
+    .alert-item.warning { border-left-color:var(--yellow); }
+    .alert-item.normal  { border-left-color:var(--green); }
+    .alert-title { font-weight:700; margin-bottom:0.3rem; }
+    .alert-msg { font-size:0.85rem; color:var(--text2); line-height:1.5; }
+
+    /* CHART */
+    .chart-wrap { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; }
+    .chart-title { font-size:0.9rem; color:var(--text2); margin-bottom:1rem; }
+    .chart-bars { display:flex; align-items:flex-end; gap:4px; height:120px; }
+    .chart-bar { flex:1; border-radius:4px 4px 0 0; min-width:8px; transition:opacity 0.2s; cursor:pointer; position:relative; }
+    .chart-bar:hover { opacity:0.8; }
+    .chart-labels { display:flex; gap:4px; margin-top:0.4rem; }
+    .chart-label { flex:1; text-align:center; font-size:0.6rem; color:var(--text2); }
+
+    /* RELANCE CARD */
+    .relance-card {
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:10px; padding:1.2rem; margin-bottom:0.8rem;
+    }
+    .relance-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem; }
+    .relance-nom { font-weight:700; font-size:0.95rem; }
+    .relance-message {
+      background:var(--bg3); border:1px solid var(--border);
+      border-radius:8px; padding:0.8rem; font-size:0.82rem;
+      color:var(--text2); line-height:1.6; white-space:pre-line;
+      margin-top:0.6rem; display:none;
+    }
+    .relance-message.show { display:block; }
+
+    /* KPI GRID */
+    .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:0.8rem; margin-bottom:1.5rem; }
+    .kpi-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1rem; text-align:center; }
+    .kpi-val { font-size:1.5rem; font-weight:800; color:var(--orange); }
+    .kpi-label { font-size:0.75rem; color:var(--text2); margin-top:0.2rem; }
+
+    /* FOOTER */
+    footer { background:var(--bg2); border-top:1px solid var(--border); color:var(--text2); text-align:center; padding:1.3rem; margin-top:2rem; font-size:0.8rem; line-height:1.8; }
+    footer span { color:var(--orange); font-weight:600; }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes spin   { to{transform:rotate(360deg)} }
+
+    @media(max-width:600px) {
+      .hero h1 { font-size:1.8rem; }
+      .nav-links button { font-size:0.7rem; padding:0.35rem 0.5rem; }
+      .page { padding:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">Smart<span>Flow</span> PME</div>
+  <div class="nav-links">
+    <button class="active" onclick="showPage('accueil',this)">🏠 Accueil</button>
+    <button onclick="showPage('dashboard',this)">📊 Dashboard</button>
+    <button onclick="showPage('credit',this)">💳 Crédit IA</button>
+    <button onclick="showPage('fraude',this)">🚨 Fraude</button>
+    <button onclick="showPage('alertes',this)">📈 Trésorerie</button>
+    <button onclick="showPage('relances',this)">📨 Relances</button>
+    <button onclick="showPage('rapport',this)">📋 Rapport</button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 1 — ACCUEIL -->
+<!-- ════════════════════════════════ -->
+<div class="page active" id="page-accueil">
+  <div class="hero">
+    <h1>Smart<span>Flow</span> PME</h1>
+    <p>Intelligence Artificielle de Gestion Financière pour PME Africaines<br>
+    Sahal Tech Innovation Challenge 2026 — STIC'26 🇧🇫</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="showPage('credit',document.querySelectorAll('.nav-links button')[2])">💳 Scorer un crédit</button>
+      <button class="btn btn-secondary" onclick="showPage('fraude',document.querySelectorAll('.nav-links button')[3])">🚨 Détecter une fraude</button>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="card-icon">🤖</div><h3>Précision IA</h3><div class="card-value">98%</div><p>Scoring crédit Random Forest</p></div>
+    <div class="card"><div class="card-icon">🏢</div><h3>PME Cibles</h3><div class="card-value">67M+</div><p>PME sous-bancarisées Afrique</p></div>
+    <div class="card"><div class="card-icon">📈</div><h3>Croissance</h3><div class="card-value">+34%</div><p>Mobile Money/an CEDEAO</p></div>
+    <div class="card"><div class="card-icon">✅</div><h3>Tests</h3><div class="card-value">17/17</div><p>Tests unitaires passés</p></div>
+  </div>
+
+  <div class="section-title">🎯 Toutes les fonctionnalités</div>
+  <div class="cards">
+    <div class="card" style="cursor:pointer" onclick="showPage('credit',document.querySelectorAll('.nav-links button')[2])">
+      <div class="card-icon">💳</div><h3>Scoring Crédit</h3>
+      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Décision IA instantanée</div>
+      <p>Analyse le profil financier et décide l'octroi de crédit.</p>
+    </div>
+    <div class="card" style="cursor:pointer" onclick="showPage('fraude',document.querySelectorAll('.nav-links button')[3])">
+      <div class="card-icon">🚨</div><h3>Détection Fraude</h3>
+      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Analyse temps réel</div>
+      <p>Détecte les transactions Mobile Money suspectes.</p>
+    </div>
+    <div class="card" style="cursor:pointer" onclick="showPage('alertes',document.querySelectorAll('.nav-links button')[4])">
+      <div class="card-icon">📈</div><h3>Alertes Trésorerie</h3>
+      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Prédiction 30 jours</div>
+      <p>Anticipe les crises de trésorerie à l'avance.</p>
+    </div>
+    <div class="card" style="cursor:pointer" onclick="showPage('relances',document.querySelectorAll('.nav-links button')[5])">
+      <div class="card-icon">📨</div><h3>Relances Auto</h3>
+      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Messages générés</div>
+      <p>Génère automatiquement les messages de relance.</p>
+    </div>
+    <div class="card" style="cursor:pointer" onclick="showPage('rapport',document.querySelectorAll('.nav-links button')[6])">
+      <div class="card-icon">📋</div><h3>Rapport Financier</h3>
+      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">KPIs complets</div>
+      <p>Rapport financier annuel avec indicateurs clés.</p>
+    </div>
+    <div class="card" style="cursor:pointer" onclick="showPage('dashboard',document.querySelectorAll('.nav-links button')[1])">
+      <div class="card-icon">📊</div><h3>Dashboard</h3>
+      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Temps réel</div>
+      <p>Vue globale des clients, crédits et alertes.</p>
+    </div>
+  </div>
+
+  <div class="section-title">👥 Équipe</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">👨‍💻</div><h3>Chef de Projet & Dev Backend</h3>
+      <div class="card-value" style="font-size:1rem">OUEDRAOGO Kevin</div>
+      <p>L1 Systèmes d'Information et Réseaux</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div><h3>Responsable IA & Automatisation</h3>
+      <div class="card-value" style="font-size:0.9rem">TAONDEYANDE W. Jean-Claude</div>
+      <p>L1 Systèmes d'Information et Réseaux</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 2 — DASHBOARD -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-dashboard">
+  <div class="section-title">📊 Dashboard — Temps réel</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="stat-clients">—</div><div class="stat-label">Clients</div></div>
+    <div class="stat-card"><div class="stat-val" id="stat-credits">—</div><div class="stat-label">Crédits</div></div>
+    <div class="stat-card"><div class="stat-val" id="stat-alertes">—</div><div class="stat-label">Alertes fraude</div></div>
+    <div class="stat-card"><div class="stat-val" id="stat-transactions">—</div><div class="stat-label">Transactions</div></div>
+  </div>
+
+  <div class="section-title">👥 Clients</div>
+  <div class="form-card">
+    <div class="loading" id="loading-clients"><div class="spinner"></div>Chargement...</div>
+    <div class="table-wrap">
+      <table><thead><tr><th>ID</th><th>Nom</th><th>Âge</th><th>Revenu (FCFA)</th><th>Historique</th></tr></thead>
+      <tbody id="tbody-clients"><tr><td colspan="5" style="text-align:center;color:#555;padding:2rem">Cliquez sur Actualiser</td></tr></tbody></table>
+    </div>
+  </div>
+
+  <div class="section-title">💳 Historique Crédits</div>
+  <div class="form-card">
+    <div class="table-wrap">
+      <table><thead><tr><th>ID</th><th>Client</th><th>Montant</th><th>Score</th><th>Décision</th><th>Date</th></tr></thead>
+      <tbody id="tbody-credits"><tr><td colspan="6" style="text-align:center;color:#555;padding:2rem">Cliquez sur Actualiser</td></tr></tbody></table>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:1rem">
+    <button class="btn btn-primary" onclick="chargerDashboard()">🔄 Actualiser</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 3 — SCORING CRÉDIT -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-credit">
+  <div class="section-title">💳 Scoring Crédit IA</div>
+  <div class="form-card">
+    <p style="color:var(--text2);margin-bottom:1.3rem;font-size:0.88rem">Renseignez le profil de la PME — décision instantanée par l'IA.</p>
+    <div class="subsection">👤 Informations Client</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Nom</label><input type="text" id="credit-nom" placeholder="Ex: PME Kaboré"/></div>
+      <div class="form-group"><label>Âge du dirigeant</label><input type="number" id="credit-age" placeholder="Ex: 35"/></div>
+      <div class="form-group"><label>Revenu annuel (FCFA)</label><input type="number" id="credit-revenu" placeholder="Ex: 8000000"/></div>
+      <div class="form-group"><label>Historique crédit (0-10)</label><input type="number" id="credit-historique" placeholder="Ex: 3"/></div>
+    </div>
+    <div class="subsection">🏢 Informations PME</div>
+    <div class="form-grid">
+      <div class="form-group"><label>Chiffre d'affaires (FCFA)</label><input type="number" id="credit-ca" placeholder="Ex: 10000000"/></div>
+      <div class="form-group"><label>Ancienneté (années)</label><input type="number" id="credit-anciennete" placeholder="Ex: 5"/></div>
+      <div class="form-group"><label>Nb employés</label><input type="number" id="credit-employes" placeholder="Ex: 12"/></div>
+      <div class="form-group"><label>Retards de paiement</label><input type="number" id="credit-retards" placeholder="Ex: 1"/></div>
+      <div class="form-group"><label>Montant dette (FCFA)</label><input type="number" id="credit-dette" placeholder="Ex: 2000000"/></div>
+      <div class="form-group"><label>Transactions Mobile Money</label><input type="number" id="credit-mobile" placeholder="Ex: 250"/></div>
+      <div class="form-group"><label>Secteur</label>
+        <select id="credit-secteur">
+          <option value="commerce">Commerce</option>
+          <option value="agriculture">Agriculture</option>
+          <option value="services">Services</option>
+          <option value="artisanat">Artisanat</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Montant demandé (FCFA)</label><input type="number" id="credit-montant" placeholder="Ex: 5000000"/></div>
+    </div>
+    <div class="form-submit"><button class="btn btn-primary" onclick="analyserCredit()">🤖 Analyser avec l'IA</button></div>
+    <div class="loading" id="loading-credit"><div class="spinner"></div>L'IA analyse...</div>
+    <div class="result-box" id="result-credit">
+      <div class="result-title" id="result-credit-title"></div>
+      <div class="result-detail" id="result-credit-detail"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 4 — FRAUDE -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-fraude">
+  <div class="section-title">🚨 Détection de Fraude Mobile Money</div>
+  <div class="form-card">
+    <p style="color:var(--text2);margin-bottom:1.3rem;font-size:0.88rem">Analysez une transaction — détection instantanée par l'IA.</p>
+    <div class="form-grid">
+      <div class="form-group"><label>ID Client</label><input type="number" id="fraude-client" placeholder="Ex: 1"/></div>
+      <div class="form-group"><label>Montant (FCFA)</label><input type="number" id="fraude-montant" placeholder="Ex: 4500000"/></div>
+      <div class="form-group"><label>Heure (0-23)</label><input type="number" id="fraude-heure" placeholder="Ex: 3"/></div>
+      <div class="form-group"><label>Nb transactions aujourd'hui</label><input type="number" id="fraude-nb" placeholder="Ex: 25"/></div>
+      <div class="form-group"><label>Distance (km)</label><input type="number" id="fraude-distance" placeholder="Ex: 450"/></div>
+      <div class="form-group"><label>Nouveau destinataire ?</label>
+        <select id="fraude-nouveau"><option value="0">Non</option><option value="1">Oui</option></select>
+      </div>
+      <div class="form-group"><label>Échecs récents</label><input type="number" id="fraude-echecs" placeholder="Ex: 3"/></div>
+      <div class="form-group"><label>Type de transaction</label>
+        <select id="fraude-type">
+          <option value="paiement">Paiement</option>
+          <option value="transfert">Transfert</option>
+          <option value="retrait">Retrait</option>
+          <option value="depot">Dépôt</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-submit"><button class="btn btn-primary" onclick="analyserFraude()">🔍 Analyser la transaction</button></div>
+    <div class="loading" id="loading-fraude"><div class="spinner"></div>Analyse en cours...</div>
+    <div class="result-box" id="result-fraude">
+      <div class="result-title" id="result-fraude-title"></div>
+      <div class="result-detail" id="result-fraude-detail"></div>
+    </div>
+  </div>
+
+  <div class="section-title">📋 Alertes récentes</div>
+  <div id="alertes-list"><p style="color:var(--text2);font-size:0.88rem">Actualisez le dashboard pour voir les alertes.</p></div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 5 — ALERTES TRÉSORERIE -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-alertes">
+  <div class="section-title">📈 Alertes Trésorerie — Prédictions 30 jours</div>
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nom de la PME</label>
+        <input type="text" id="alertes-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/>
+      </div>
+    </div>
+    <div class="form-submit">
+      <button class="btn btn-primary" onclick="chargerAlertes()">📊 Analyser la trésorerie</button>
+    </div>
+  </div>
+
+  <div class="loading" id="loading-alertes"><div class="spinner"></div>Analyse en cours...</div>
+  <div id="alertes-result" style="display:none">
+
+    <div class="stats-grid" id="alertes-stats"></div>
+
+    <div class="section-title">🔔 Alertes détectées</div>
+    <div id="alertes-items"></div>
+
+    <div class="section-title">📉 Historique & Prédictions</div>
+    <div class="chart-wrap">
+      <div class="chart-title">Solde trésorerie (FCFA) — 90 jours historique + 30 jours prédiction</div>
+      <canvas id="chart-tresorerie" height="200"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 6 — RELANCES -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-relances">
+  <div class="section-title">📨 Relances Automatiques Clients</div>
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nom de la PME</label>
+        <input type="text" id="relances-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/>
+      </div>
+    </div>
+    <div class="form-submit">
+      <button class="btn btn-primary" onclick="chargerRelances()">📨 Générer les relances</button>
+    </div>
+  </div>
+
+  <div class="loading" id="loading-relances"><div class="spinner"></div>Génération des messages...</div>
+  <div id="relances-result" style="display:none">
+    <div class="stats-grid" id="relances-stats"></div>
+    <div class="section-title">👥 Clients en retard</div>
+    <div id="relances-list"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 7 — RAPPORT FINANCIER -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-rapport">
+  <div class="section-title">📋 Rapport Financier Annuel</div>
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nom de la PME</label>
+        <input type="text" id="rapport-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/>
+      </div>
+    </div>
+    <div class="form-submit">
+      <button class="btn btn-primary" onclick="chargerRapport()">📋 Générer le rapport</button>
+    </div>
+  </div>
+
+  <div class="loading" id="loading-rapport"><div class="spinner"></div>Génération du rapport...</div>
+  <div id="rapport-result" style="display:none">
+    <div class="section-title">📊 Indicateurs Clés (KPIs)</div>
+    <div class="kpi-grid" id="rapport-kpis"></div>
+
+    <div class="section-title">💰 Revenus vs Charges mensuels</div>
+    <div class="chart-wrap">
+      <canvas id="chart-mensuel" height="200"></canvas>
+    </div>
+
+    <div class="section-title">🤖 Recommandations IA</div>
+    <div id="rapport-recommandations"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>SmartFlow PME © 2026 — <span>STIC'26</span> — Sahal Tech Innovation Labs, Burkina Faso 🇧🇫</p>
+  <p>OUEDRAOGO Kevin & TAONDEYANDE Wendmanegda Jean-Claude</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const API = "http://127.0.0.1:8000";
+let chartTresorerie = null;
+let chartMensuel    = null;
+
+// ── Navigation ──────────────────────────────
+function showPage(name, btn) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".nav-links button").forEach(b => b.classList.remove("active"));
+  document.getElementById("page-" + name).classList.add("active");
+  if (btn) btn.classList.add("active");
+  if (name === "dashboard") chargerDashboard();
+}
+
+// ── Dashboard ────────────────────────────────
+async function chargerDashboard() {
+  document.getElementById("loading-clients").style.display = "block";
+  try {
+    const [clients, credits, alertes, transactions] = await Promise.all([
+      fetch(`${API}/clients/`).then(r=>r.json()),
+      fetch(`${API}/credits/`).then(r=>r.json()),
+      fetch(`${API}/fraud/alertes`).then(r=>r.json()),
+      fetch(`${API}/transactions/`).then(r=>r.json()),
+    ]);
+    document.getElementById("stat-clients").textContent      = clients.length;
+    document.getElementById("stat-credits").textContent      = credits.length;
+    document.getElementById("stat-alertes").textContent      = alertes.length;
+    document.getElementById("stat-transactions").textContent = transactions.length;
+
+    document.getElementById("tbody-clients").innerHTML = clients.length === 0
+      ? `<tr><td colspan="5" style="text-align:center;color:#555;padding:1.5rem">Aucun client</td></tr>`
+      : clients.map(c=>`<tr>
+          <td style="color:var(--text2)">#${c.id}</td>
+          <td><strong>${c.nom}</strong></td>
+          <td>${c.age} ans</td>
+          <td>${c.revenu.toLocaleString()} FCFA</td>
+          <td>${c.historique_credit}</td></tr>`).join("");
+
+    document.getElementById("tbody-credits").innerHTML = credits.length === 0
+      ? `<tr><td colspan="6" style="text-align:center;color:#555;padding:1.5rem">Aucune demande</td></tr>`
+      : credits.map(c=>`<tr>
+          <td style="color:var(--text2)">#${c.id}</td>
+          <td>Client #${c.client_id}</td>
+          <td>${c.montant_demande.toLocaleString()} FCFA</td>
+          <td>${(c.score_credit*100).toFixed(0)}%</td>
+          <td><span class="badge ${c.decision==='Accepté'?'badge-green':'badge-red'}">${c.decision}</span></td>
+          <td>${new Date(c.date_demande).toLocaleDateString('fr-FR')}</td></tr>`).join("");
+
+    document.getElementById("alertes-list").innerHTML = alertes.length === 0
+      ? `<p style="color:var(--text2);font-size:0.88rem">✅ Aucune alerte fraude.</p>`
+      : alertes.map(a=>`<div class="alert-item">
+          <div class="alert-title">🚨 Alerte #${a.id} — Client #${a.client_id}</div>
+          <div class="alert-msg">${a.message}</div>
+          <div class="alert-msg" style="font-size:0.78rem;margin-top:0.2rem">📅 ${new Date(a.date).toLocaleString('fr-FR')}</div>
+        </div>`).join("");
+  } catch(e) {
+    document.getElementById("tbody-clients").innerHTML =
+      `<tr><td colspan="5" style="text-align:center;color:var(--red);padding:1.5rem">❌ API non connectée</td></tr>`;
+  }
+  document.getElementById("loading-clients").style.display = "none";
+}
+
+// ── Crédit ───────────────────────────────────
+async function analyserCredit() {
+  const nom     = document.getElementById("credit-nom").value;
+  const age     = parseInt(document.getElementById("credit-age").value);
+  const revenu  = parseFloat(document.getElementById("credit-revenu").value);
+  const hist    = parseInt(document.getElementById("credit-historique").value)||0;
+  const ca      = parseInt(document.getElementById("credit-ca").value);
+  const ancien  = parseInt(document.getElementById("credit-anciennete").value)||1;
+  const employes= parseInt(document.getElementById("credit-employes").value)||1;
+  const retards = parseInt(document.getElementById("credit-retards").value)||0;
+  const dette   = parseInt(document.getElementById("credit-dette").value)||0;
+  const mobile  = parseInt(document.getElementById("credit-mobile").value)||0;
+  const secteur = document.getElementById("credit-secteur").value;
+  const montant = parseFloat(document.getElementById("credit-montant").value);
+
+  if (!nom||!age||!revenu||!ca||!montant){alert("⚠️ Remplissez tous les champs !");return;}
+
+  document.getElementById("loading-credit").style.display = "block";
+  document.getElementById("result-credit").classList.remove("show");
+  try {
+    const clientRes = await fetch(`${API}/clients/`,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({nom,age,revenu,historique_credit:hist})});
+    const client = await clientRes.json();
+
+    const creditRes = await fetch(`${API}/credits/`,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({client_id:client.id,montant_demande:montant,secteur,
+        nb_employes:employes,retards_paiement:retards,montant_dette:dette,transactions_mobile:mobile})});
+    const credit = await creditRes.json();
+
+    const box = document.getElementById("result-credit");
+    if (credit.decision==="Accepté") {
+      box.className="result-box success show";
+      document.getElementById("result-credit-title").innerHTML=`✅ Crédit ACCORDÉ — ${nom}`;
+      document.getElementById("result-credit-detail").innerHTML=`
+        Score IA : <strong style="color:var(--green)">${(credit.score_credit*100).toFixed(0)}%</strong><br>
+        Montant approuvé : <strong>${montant.toLocaleString()} FCFA</strong><br>
+        Secteur : <strong>${secteur}</strong>`;
+    } else {
+      box.className="result-box danger show";
+      document.getElementById("result-credit-title").innerHTML=`❌ Crédit REFUSÉ — ${nom}`;
+      document.getElementById("result-credit-detail").innerHTML=`
+        Score IA : <strong style="color:var(--red)">${(credit.score_credit*100).toFixed(0)}%</strong><br>
+        Profil jugé trop risqué. Conseil : réduire les dettes et améliorer l'historique.`;
+    }
+  } catch(e){alert("❌ Erreur API !");}
+  document.getElementById("loading-credit").style.display="none";
+}
+
+// ── Fraude ───────────────────────────────────
+async function analyserFraude() {
+  const clientId= parseInt(document.getElementById("fraude-client").value);
+  const montant = parseFloat(document.getElementById("fraude-montant").value);
+  const heure   = parseInt(document.getElementById("fraude-heure").value)||0;
+  const nb      = parseInt(document.getElementById("fraude-nb").value)||1;
+  const distance= parseInt(document.getElementById("fraude-distance").value)||0;
+  const nouveau = parseInt(document.getElementById("fraude-nouveau").value);
+  const echecs  = parseInt(document.getElementById("fraude-echecs").value)||0;
+  const type    = document.getElementById("fraude-type").value;
+
+  if (!clientId||!montant){alert("⚠️ Remplissez tous les champs !");return;}
+
+  document.getElementById("loading-fraude").style.display="block";
+  document.getElementById("result-fraude").classList.remove("show");
+  try {
+    const res = await fetch(`${API}/fraud/`,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({client_id:clientId,montant,heure_transaction:heure,
+        nb_transactions_jour:nb,distance_km:distance,nouveau_destinataire:nouveau,
+        echecs_recents:echecs,type_transaction:type})});
+    const data = await res.json();
+    const box  = document.getElementById("result-fraude");
+
+    if (data.decision==="Fraude suspectée") {
+      box.className="result-box danger show";
+      document.getElementById("result-fraude-title").innerHTML=`🚨 FRAUDE DÉTECTÉE !`;
+      document.getElementById("result-fraude-detail").innerHTML=`
+        Risque : <strong style="color:var(--red)">${data.risque}</strong><br>
+        Action : <strong>${data.action}</strong><br>
+        Type : <strong>${type}</strong> — ${montant.toLocaleString()} FCFA`;
+    } else {
+      box.className="result-box success show";
+      document.getElementById("result-fraude-title").innerHTML=`✅ Transaction NORMALE`;
+      document.getElementById("result-fraude-detail").innerHTML=`
+        Risque : <strong style="color:var(--green)">${data.risque}</strong><br>
+        Transaction sans caractéristiques suspectes.`;
+    }
+  } catch(e){alert("❌ Erreur API !");}
+  document.getElementById("loading-fraude").style.display="none";
+}
+
+// ── Alertes Trésorerie ───────────────────────
+async function chargerAlertes() {
+  const nom = document.getElementById("alertes-nom").value || "PME Test";
+  document.getElementById("loading-alertes").style.display = "block";
+  document.getElementById("alertes-result").style.display  = "none";
+
+  try {
+    const data = await fetch(`${API}/ia/alertes-tresorerie/${encodeURIComponent(nom)}`).then(r=>r.json());
+
+    // Stats
+    const niveauColor = data.solde_actuel < 500000 ? "var(--red)"
+                      : data.solde_actuel < 1500000 ? "var(--yellow)"
+                      : "var(--green)";
+    document.getElementById("alertes-stats").innerHTML = `
+      <div class="stat-card"><div class="stat-val" style="color:${niveauColor}">${(data.solde_actuel/1000000).toFixed(1)}M</div><div class="stat-label">Solde actuel (FCFA)</div></div>
+      <div class="stat-card"><div class="stat-val">${(data.solde_moyen/1000000).toFixed(1)}M</div><div class="stat-label">Solde moyen (FCFA)</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:${data.tendance<0?'var(--red)':'var(--green)'}">
+        ${data.tendance>0?'+':''}${(data.tendance/1000).toFixed(0)}K</div><div class="stat-label">Tendance/semaine</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--yellow)">${(data.solde_predit/1000000).toFixed(1)}M</div><div class="stat-label">Solde prédit 30j</div></div>`;
+
+    // Alertes
+    document.getElementById("alertes-items").innerHTML = data.alertes.map(a => {
+      const cls = a.niveau.includes("DANGER") ? "" : a.niveau.includes("ALERTE") ? "warning" : "normal";
+      return `<div class="alert-item ${cls}">
+        <div class="alert-title">${a.niveau} — ${a.type}</div>
+        <div class="alert-msg">Valeur : ${a.valeur} | ${a.message}</div>
+      </div>`;
+    }).join("");
+
+    // Graphique
+    if (chartTresorerie) chartTresorerie.destroy();
+    const histDates  = data.historique.map(d=>d.date.slice(5));
+    const histSoldes = data.historique.map(d=>d.solde/1000000);
+    const predDates  = data.prediction.map(d=>d.date.slice(5));
+    const predSoldes = data.prediction.map(d=>d.solde/1000000);
+
+    chartTresorerie = new Chart(document.getElementById("chart-tresorerie"),{
+      type:"line",
+      data:{
+        labels:[...histDates, ...predDates.slice(1)],
+        datasets:[
+          {label:"Historique 90j",data:[...histSoldes,...Array(predDates.length-1).fill(null)],
+           borderColor:"#3B82F6",backgroundColor:"rgba(59,130,246,0.1)",tension:0.3,fill:true,pointRadius:0},
+          {label:"Prédiction 30j",data:[...Array(histSoldes.length-1).fill(null),histSoldes[histSoldes.length-1],...predSoldes.slice(1)],
+           borderColor:"#F59E0B",backgroundColor:"rgba(245,158,11,0.1)",tension:0.3,fill:true,
+           borderDash:[6,3],pointRadius:0},
+        ]
+      },
+      options:{
+        responsive:true,
+        plugins:{legend:{labels:{color:"#A0A0A0",font:{size:11}}}},
+        scales:{
+          x:{ticks:{color:"#555",maxTicksLimit:12},grid:{color:"#2E2E2E"}},
+          y:{ticks:{color:"#A0A0A0",callback:v=>v+"M"},grid:{color:"#2E2E2E"}}
+        }
+      }
+    });
+
+    document.getElementById("alertes-result").style.display = "block";
+  } catch(e) { alert("❌ Erreur API — vérifiez que le serveur est lancé !"); }
+  document.getElementById("loading-alertes").style.display = "none";
+}
+
+// ── Relances ─────────────────────────────────
+async function chargerRelances() {
+  const nom = document.getElementById("relances-nom").value || "PME Test";
+  document.getElementById("loading-relances").style.display = "block";
+  document.getElementById("relances-result").style.display  = "none";
+
+  try {
+    const data = await fetch(`${API}/ia/relances/${encodeURIComponent(nom)}`).then(r=>r.json());
+
+    document.getElementById("relances-stats").innerHTML = `
+      <div class="stat-card"><div class="stat-val">${data.total_clients}</div><div class="stat-label">Clients en retard</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--red)">${(data.total_montant_du/1000000).toFixed(1)}M</div><div class="stat-label">Total dû (FCFA)</div></div>`;
+
+    const colors = {"MISE EN DEMEURE":"badge-red","RELANCE FERME":"badge-orange","RELANCE STANDARD":"badge-yellow","RAPPEL DOUX":"badge-green"};
+
+    document.getElementById("relances-list").innerHTML = data.clients.map((c,i)=>`
+      <div class="relance-card">
+        <div class="relance-header">
+          <div class="relance-nom">👤 ${c.nom}</div>
+          <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap">
+            <span class="badge ${colors[c.niveau]||'badge-orange'}">${c.niveau}</span>
+            <span style="font-size:0.8rem;color:var(--text2)">${c.risque}</span>
+            <span style="font-size:0.8rem;color:var(--orange);font-weight:600">${c.montant_du.toLocaleString()} FCFA</span>
+          </div>
+        </div>
+        <div style="font-size:0.82rem;color:var(--text2)">
+          ⏰ ${c.jours_retard} jours de retard &nbsp;|&nbsp; 📱 ${c.telephone}
+        </div>
+        <div style="margin-top:0.6rem">
+          <button class="btn btn-secondary btn-sm" onclick="toggleMessage('msg-${i}')">
+            📝 Voir le message
+          </button>
+        </div>
+        <div class="relance-message" id="msg-${i}">${c.message}</div>
+      </div>`).join("");
+
+    document.getElementById("relances-result").style.display = "block";
+  } catch(e) { alert("❌ Erreur API !"); }
+  document.getElementById("loading-relances").style.display = "none";
+}
+
+function toggleMessage(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle("show");
+}
+
+// ── Rapport Financier ────────────────────────
+async function chargerRapport() {
+  const nom = document.getElementById("rapport-nom").value || "PME Test";
+  document.getElementById("loading-rapport").style.display = "block";
+  document.getElementById("rapport-result").style.display  = "none";
+
+  try {
+    const data = await fetch(`${API}/ia/rapport/${encodeURIComponent(nom)}`).then(r=>r.json());
+    const k    = data.kpis;
+
+    // KPIs
+    document.getElementById("rapport-kpis").innerHTML = `
+      <div class="kpi-card"><div class="kpi-val">${(k.revenu_total/1000000).toFixed(1)}M</div><div class="kpi-label">💰 Revenu Total (FCFA)</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="color:${k.benefice_total>0?'var(--green)':'var(--red)'}">
+        ${(k.benefice_total/1000000).toFixed(1)}M</div><div class="kpi-label">📈 Bénéfice Total</div></div>
+      <div class="kpi-card"><div class="kpi-val">${k.marge_beneficiaire}%</div><div class="kpi-label">📊 Marge Bénéficiaire</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="color:${k.solde_actuel<1000000?'var(--red)':k.solde_actuel<3000000?'var(--yellow)':'var(--green)'}">
+        ${(k.solde_actuel/1000000).toFixed(1)}M</div><div class="kpi-label">🏦 Solde Actuel</div></div>
+      <div class="kpi-card"><div class="kpi-val">${k.nb_clients}</div><div class="kpi-label">👥 Clients</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="color:${k.taux_recouvrement<60?'var(--red)':'var(--green)'}">
+        ${k.taux_recouvrement}%</div><div class="kpi-label">✅ Taux Recouvrement</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="font-size:1.1rem">${k.meilleur_mois}</div><div class="kpi-label">🌟 Meilleur Mois</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="font-size:1.1rem;color:var(--red)">${k.pire_mois}</div><div class="kpi-label">⚠️ Pire Mois</div></div>`;
+
+    // Graphique mensuel
+    if (chartMensuel) chartMensuel.destroy();
+    chartMensuel = new Chart(document.getElementById("chart-mensuel"),{
+      type:"bar",
+      data:{
+        labels: data.mensuel.map(m=>m.mois),
+        datasets:[
+          {label:"Revenus",  data:data.mensuel.map(m=>m.revenus/1000000),  backgroundColor:"rgba(46,204,113,0.7)"},
+          {label:"Charges",  data:data.mensuel.map(m=>m.charges/1000000),  backgroundColor:"rgba(239,68,68,0.7)"},
+          {label:"Bénéfice", data:data.mensuel.map(m=>m.benefice/1000000), backgroundColor:"rgba(255,107,43,0.7)", type:"line", tension:0.3},
+        ]
+      },
+      options:{
+        responsive:true,
+        plugins:{legend:{labels:{color:"#A0A0A0",font:{size:11}}}},
+        scales:{
+          x:{ticks:{color:"#A0A0A0"},grid:{color:"#2E2E2E"}},
+          y:{ticks:{color:"#A0A0A0",callback:v=>v+"M"},grid:{color:"#2E2E2E"}}
+        }
+      }
+    });
+
+    // Recommandations IA
+    let reco = [];
+    if (k.marge_beneficiaire < 20) reco.push({icon:"⚠️",msg:"Marge faible — réduire les charges opérationnelles",cls:"warning"});
+    else reco.push({icon:"✅",msg:"Marge saine — maintenir le cap",cls:"normal"});
+    if (k.solde_actuel < 1000000) reco.push({icon:"🔴",msg:"Trésorerie critique — action urgente requise",cls:""});
+    else if (k.solde_actuel < 3000000) reco.push({icon:"🟡",msg:"Trésorerie à surveiller",cls:"warning"});
+    else reco.push({icon:"✅",msg:"Trésorerie saine",cls:"normal"});
+    if (k.taux_recouvrement < 60) reco.push({icon:"⚠️",msg:"Taux de recouvrement faible — activer les relances",cls:"warning"});
+    else reco.push({icon:"✅",msg:"Recouvrement satisfaisant",cls:"normal"});
+
+    document.getElementById("rapport-recommandations").innerHTML = reco.map(r=>`
+      <div class="alert-item ${r.cls}">
+        <div class="alert-msg">${r.icon} ${r.msg}</div>
+      </div>`).join("");
+
+    document.getElementById("rapport-result").style.display = "block";
+  } catch(e) { alert("❌ Erreur API !"); }
+  document.getElementById("loading-rapport").style.display = "none";
+}
+</script>
+</body>
+</html>
