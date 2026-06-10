@@ -27,8 +27,9 @@ app.include_router(clients.router)
 app.include_router(transactions.router)
 app.include_router(credits.router)
 app.include_router(fraud.router)
-app.include_router(chatbot.router)
 app.include_router(ia.router)
+app.include_router(chatbot.router)
+
 
 @app.get("/")
 def root():

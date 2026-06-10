@@ -1,71 +1,61 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from pydantic import BaseModel
-from sqlalchemy.orm import Session
-from backend.database.db import get_db
-from backend.database.schema import Client, Credit, Alerte
-import requests
-from datetime import datetime
-import os
-from dotenv import load_dotenv
-
-# Charger les variables d'environnement depuis .env
-load_dotenv()
+import sqlite3
 
 router = APIRouter(prefix="/chatbot", tags=["Chatbot"])
 
-class ChatMessage(BaseModel):
-    client_id: int | None = None
+class ChatRequest(BaseModel):
+    client_id: int
     text: str
 
-# Hugging Face API config
-HF_TOKEN = os.getenv("HF_TOKEN")   # récupéré depuis .env
-API_URL = "https://api-inference.huggingface.co/models/bert-base-uncased"
-headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
-
-def query_hf(user_input: str):
-    if not HF_TOKEN:
-        return {"error": "Token Hugging Face introuvable"}
-    response = requests.post(API_URL, headers=headers, json={"inputs": user_input})
-    return response.json()
+# Connexion à la base SQLite
+def get_db_connection():
+    conn = sqlite3.connect("banque.db")  # ⚠️ adapte le nom de ton fichier DB
+    conn.row_factory = sqlite3.Row
+    return conn
 
 @router.post("/")
-def chatbot_reply(msg: ChatMessage, db: Session = Depends(get_db)):
-    text = msg.text.lower()
-    reply = None
+def chatbot_reply(request: ChatRequest):
+    text = request.text.lower()
+    client_id = request.client_id
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-    # 🔹 Logique métier SmartFlow PME
-    if "solde" in text and msg.client_id:
-        client = db.query(Client).filter(Client.id == msg.client_id).first()
-        if client:
-            reply = f"Votre solde actuel est de {client.revenu} FCFA."
+    # Vérifier le solde du client
+    if "solde" in text:
+        cursor.execute("SELECT solde FROM clients WHERE id = ?", (client_id,))
+        row = cursor.fetchone()
+        conn.close()
+        if row:
+            return {"reply": f"Votre solde actuel est de {row['solde']} €."}
+        return {"reply": "Client introuvable."}
 
-    elif "credit" in text and msg.client_id:
-        credit = db.query(Credit).filter(Credit.client_id == msg.client_id).order_by(Credit.date_demande.desc()).first()
-        if credit:
-            reply = f"Votre dernière demande de crédit ({credit.montant_demande} FCFA) a été {credit.decision}."
-        else:
-            reply = "Vous pouvez faire une demande de crédit via l’endpoint /credits."
+    # Créer un crédit
+    elif "crédit" in text:
+        montant = 1000  # exemple fixe
+        cursor.execute("INSERT INTO credits (client_id, montant) VALUES (?, ?)", (client_id, montant))
+        conn.commit()
+        conn.close()
+        return {"reply": f"Votre demande de crédit de {montant} € a été enregistrée."}
 
-    elif "fraude" in text and msg.client_id:
-        alerte = db.query(Alerte).filter(Alerte.client_id == msg.client_id).order_by(Alerte.date.desc()).first()
-        if alerte:
-            reply = f"⚠️ Alerte fraude détectée : {alerte.message}"
-        else:
-            reply = "Aucune fraude détectée sur vos transactions récentes."
+    # Créer une transaction
+    elif "transaction" in text:
+        montant = 200  # exemple fixe
+        type_tx = "paiement"
+        cursor.execute("INSERT INTO transactions (client_id, montant, type) VALUES (?, ?, ?)", (client_id, montant, type_tx))
+        conn.commit()
+        conn.close()
+        return {"reply": f"Votre transaction de {montant} € a été effectuée."}
 
-    # 🔹 Si pas de logique métier → appel Hugging Face pour réponse naturelle
-    if not reply:
-        data = query_hf(msg.text)
-        if isinstance(data, list) and "generated_text" in data[0]:
-            reply = data[0]["generated_text"]
-        else:
-            reply = "Je n’ai pas pu générer de réponse."
+    # Vérifier alertes de fraude
+    elif "fraude" in text:
+        cursor.execute("SELECT * FROM alertes WHERE client_id = ?", (client_id,))
+        alertes = cursor.fetchall()
+        conn.close()
+        if alertes:
+            return {"reply": f"⚠️ Attention, {len(alertes)} alertes de fraude détectées sur votre compte."}
+        return {"reply": "✅ Aucune fraude détectée sur vos transactions."}
 
-    # 🔹 Sauvegarde historique (optionnel)
-    db.execute(
-        "INSERT INTO chat_history (client_id, message, reply, date) VALUES (?, ?, ?, ?)",
-        (msg.client_id, msg.text, reply, datetime.utcnow())
-    )
-    db.commit()
-
-    return {"reply": reply}
+    # Réponse par défaut
+    conn.close()
+    return {"reply": "Je peux vous aider à consulter votre solde, créer un crédit ou une transaction, et vérifier la fraude."}
