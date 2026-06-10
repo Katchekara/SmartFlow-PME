@@ -1,2 +1,16 @@
 ".env" 
 ".env" 
+__pycache__/ 
+*.pyc 
+
+# Ignorer les fichiers compilés Python
+__pycache__/
+*.pyc
+
+# Ignorer les environnements virtuels
+venv/
+.env
+
+# Ignorer les fichiers de config locaux
+.vscode/
+.idea/
