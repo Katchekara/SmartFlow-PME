@@ -80,15 +80,22 @@ def relances_clients(nom_pme: str):
 
 @router.get("/rapport/{nom_pme}")
 def rapport_financier(nom_pme: str):
-    from ai_models.rapports import (generer_donnees_pme, calculer_kpis)
+    from ai_models.rapports import generer_donnees_pme, calculer_kpis
 
     df_mensuel, df_tresorerie, df_clients = generer_donnees_pme(nom_pme)
     kpis = calculer_kpis(df_mensuel, df_tresorerie, df_clients)
 
+    # Convertir tous les types numpy en types Python natifs
+    def convert(v):
+        import numpy as np
+        if isinstance(v, (np.integer,)):  return int(v)
+        if isinstance(v, (np.floating,)): return float(v)
+        if isinstance(v, (np.bool_,)):    return bool(v)
+        return v
+
     return {
         "pme":  nom_pme,
-        "kpis": {k: round(v, 2) if isinstance(v, float) else v
-                 for k, v in kpis.items()},
+        "kpis": {k: convert(v) for k, v in kpis.items()},
         "mensuel": [
             {
                 "mois":     row["mois"],
@@ -99,8 +106,11 @@ def rapport_financier(nom_pme: str):
             for _, row in df_mensuel.iterrows()
         ],
         "tresorerie_30j": [
-            {"date": str(row["date"].date()), "solde": round(row["solde"])}
+            {"date": str(row["date"].date()), "solde": float(row["solde"])}
             for _, row in df_tresorerie.iterrows()
         ],
-        "statut_clients": df_clients["statut"].value_counts().to_dict(),
+        "statut_clients": {
+            k: int(v)
+            for k, v in df_clients["statut"].value_counts().items()
+        },
     }

@@ -1,22 +1,40 @@
-import os
-import requests
-from dotenv import load_dotenv
+# backend/main.py
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from backend.database.db import engine, Base
+from backend.routes import clients, transactions, credits, fraud, ia
 
-# Charger le fichier .env
-load_dotenv()
-HF_TOKEN = os.getenv("HF_TOKEN")
+Base.metadata.create_all(bind=engine)
 
-API_URL = "https://api-inference.huggingface.co/models/bert-base-uncased"
-headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+app = FastAPI(
+    title="SmartFlow PME API",
+    description="Système d'IA de gestion financière prédictive pour PME Africaines",
+    version="1.0.0"
+)
 
-def query_hf(text: str):
-    response = requests.post(API_URL, headers=headers, json={"inputs": text})
-    return response.json()
+# ── CORS — autorise le site web à appeler l'API ──
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-if __name__ == "__main__":
-    if HF_TOKEN:
-        print("✅ Token trouvé :", HF_TOKEN[:10] + "...")
-        result = query_hf("Bonjour, je teste mon API Hugging Face.")
-        print("Réponse Hugging Face :", result)
-    else:
-        print("❌ Token introuvable. Vérifie ton fichier .env")
+app.include_router(clients.router)
+app.include_router(transactions.router)
+app.include_router(credits.router)
+app.include_router(fraud.router)
+app.include_router(ia.router)
+
+@app.get("/")
+def root():
+    return {
+        "message": "✅ SmartFlow PME API opérationnelle",
+        "version": "1.0.0",
+        "docs":    "/docs",
+        "equipe":  [
+            "OUEDRAOGO Kevin — Chef de Projet",
+            "TAONDEYANDE Wendmanegda Jean-Claude — IA"
+        ]
+    }

@@ -5,14 +5,10 @@
 # ============================================
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from backend.database.db import engine
 from backend.database.schema import Base
-from backend.routes import clients, transactions, credits, fraud, chatbot, ia,  dashboard
-
-
-
-
-
+from backend.routes import clients, transactions, credits, fraud, chatbot, ia, dashboard
 
 # Créer les tables en base
 Base.metadata.create_all(bind=engine)
@@ -22,6 +18,15 @@ app = FastAPI(
     title="SmartFlow PME API",
     description="Système d'IA de gestion financière prédictive pour PME Africaines",
     version="1.0.0"
+)
+
+# ── CORS — autorise le site web à appeler l'API ──
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Enregistrer les routes
@@ -38,8 +43,8 @@ def root():
     return {
         "message": "✅ SmartFlow PME API opérationnelle",
         "version": "1.0.0",
-        "docs": "/docs",
-        "equipe": [
+        "docs":    "/docs",
+        "equipe":  [
             "OUEDRAOGO Kevin — Chef de Projet",
             "TAONDEYANDE Wendmanegda Jean-Claude — IA"
         ]
