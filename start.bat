@@ -1,6 +1,7 @@
 @echo off
 title SmartFlow PME - Lancement automatique
 color 0A
+cd /d "%~dp0"
 
 echo.
 echo  ╔══════════════════════════════════════════╗
@@ -12,33 +13,33 @@ echo.
 echo [1/3] Entraînement des modèles IA...
 python ai_models/train_credit.py > nul 2>&1
 python ai_models/train_fraud.py > nul 2>&1
-echo      OK - Modèles IA prêts !
+echo      OK - Modèles IA prets !
 
 echo.
 echo [2/3] Lancement de l'API...
-start /B python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 > nul 2>&1
-timeout /t 3 /nobreak > nul
-echo      OK - API lancée sur http://127.0.0.1:8000
+start "SmartFlow-API" python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+echo      Attente demarrage API...
+timeout /t 5 /nobreak > nul
 
 echo.
 echo [3/3] Lancement du site web...
-start /B python -m http.server 5500 --directory frontend > nul 2>&1
-timeout /t 2 /nobreak > nul
-echo      OK - Site lancé sur http://127.0.0.1:5500
+start "SmartFlow-Site" python -m http.server 5500 --directory frontend
+timeout /t 3 /nobreak > nul
 
 echo.
-echo  ✅ SmartFlow PME est opérationnel !
+echo  SmartFlow PME est operationnel !
 echo.
 echo  Site web : http://127.0.0.1:5500
 echo  API docs : http://127.0.0.1:8000/docs
 echo.
 
 start http://127.0.0.1:5500
-echo  Appuyez sur une touche pour arrêter tous les serveurs...
+
+echo  Appuyez sur une touche pour arreter...
 pause > nul
 
-echo.
-echo Arrêt des serveurs...
-taskkill /f /im python.exe > nul 2>&1
-echo Serveurs arrêtés. Au revoir !
+echo Arret des serveurs...
+taskkill /f /fi "WINDOWTITLE eq SmartFlow-API" > nul 2>&1
+taskkill /f /fi "WINDOWTITLE eq SmartFlow-Site" > nul 2>&1
+echo Termine !
 timeout /t 2 /nobreak > nul
