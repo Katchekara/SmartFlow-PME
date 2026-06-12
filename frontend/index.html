@@ -64,19 +64,12 @@
     .btn-sm { padding:0.4rem 1rem; font-size:0.82rem; }
 
     /* SECTION TITLE */
-    .section-title {
-      font-size:1.1rem; font-weight:700; color:var(--text);
-      margin-bottom:1rem; padding-bottom:0.5rem;
-      border-bottom:1px solid var(--border);
-    }
+    .section-title { font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--border); }
     .subsection { font-size:0.9rem; font-weight:600; color:var(--orange); margin:1.2rem 0 0.8rem; }
 
     /* CARDS */
     .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:1.5rem; }
-    .card {
-      background:var(--bg2); border:1px solid var(--border);
-      border-radius:12px; padding:1.3rem; transition:all 0.2s;
-    }
+    .card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:1.3rem; transition:all 0.2s; }
     .card:hover { border-color:var(--orange); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.4); }
     .card-icon { font-size:1.6rem; margin-bottom:0.6rem; }
     .card h3 { font-size:0.75rem; color:var(--text2); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.3rem; }
@@ -88,11 +81,7 @@
     .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
     .form-group { display:flex; flex-direction:column; gap:0.35rem; }
     .form-group label { font-size:0.78rem; font-weight:600; color:var(--text2); text-transform:uppercase; letter-spacing:0.4px; }
-    .form-group input, .form-group select {
-      padding:0.65rem 0.9rem; background:var(--bg3);
-      border:1.5px solid var(--border); border-radius:8px;
-      font-size:0.9rem; color:var(--text); outline:none; transition:border 0.2s;
-    }
+    .form-group input, .form-group select { padding:0.65rem 0.9rem; background:var(--bg3); border:1.5px solid var(--border); border-radius:8px; font-size:0.9rem; color:var(--text); outline:none; transition:border 0.2s; }
     .form-group input:focus, .form-group select:focus { border-color:var(--orange); }
     .form-group input::placeholder { color:#444; }
     .form-group select option { background:var(--bg3); }
@@ -139,26 +128,12 @@
 
     /* CHART */
     .chart-wrap { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; }
-    .chart-title { font-size:0.9rem; color:var(--text2); margin-bottom:1rem; }
-    .chart-bars { display:flex; align-items:flex-end; gap:4px; height:120px; }
-    .chart-bar { flex:1; border-radius:4px 4px 0 0; min-width:8px; transition:opacity 0.2s; cursor:pointer; position:relative; }
-    .chart-bar:hover { opacity:0.8; }
-    .chart-labels { display:flex; gap:4px; margin-top:0.4rem; }
-    .chart-label { flex:1; text-align:center; font-size:0.6rem; color:var(--text2); }
 
     /* RELANCE CARD */
-    .relance-card {
-      background:var(--bg2); border:1px solid var(--border);
-      border-radius:10px; padding:1.2rem; margin-bottom:0.8rem;
-    }
+    .relance-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1.2rem; margin-bottom:0.8rem; }
     .relance-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem; }
     .relance-nom { font-weight:700; font-size:0.95rem; }
-    .relance-message {
-      background:var(--bg3); border:1px solid var(--border);
-      border-radius:8px; padding:0.8rem; font-size:0.82rem;
-      color:var(--text2); line-height:1.6; white-space:pre-line;
-      margin-top:0.6rem; display:none;
-    }
+    .relance-message { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:0.8rem; font-size:0.82rem; color:var(--text2); line-height:1.6; white-space:pre-line; margin-top:0.6rem; display:none; }
     .relance-message.show { display:block; }
 
     /* KPI GRID */
@@ -166,6 +141,20 @@
     .kpi-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1rem; text-align:center; }
     .kpi-val { font-size:1.5rem; font-weight:800; color:var(--orange); }
     .kpi-label { font-size:0.75rem; color:var(--text2); margin-top:0.2rem; }
+
+    /* ── CHATBOT ── */
+    .chat-bubble { max-width:75%; padding:0.8rem 1.1rem; border-radius:12px; font-size:0.88rem; line-height:1.6; }
+    .bot-bubble { background:var(--bg3); border:1px solid var(--border); color:var(--text); border-bottom-left-radius:4px; }
+    .user-bubble { background:var(--orange); color:var(--white); border-bottom-right-radius:4px; margin-left:auto; }
+    .chat-msg { display:flex; flex-direction:column; }
+    .chat-msg.user { align-items:flex-end; }
+    .chat-msg.bot  { align-items:flex-start; }
+    .chat-time { font-size:0.7rem; color:var(--text2); margin-top:0.2rem; padding:0 0.3rem; }
+    .chat-loading { display:flex; gap:4px; padding:0.8rem 1.1rem; background:var(--bg3); border:1px solid var(--border); border-radius:12px; border-bottom-left-radius:4px; width:fit-content; }
+    .chat-dot { width:7px; height:7px; background:var(--text2); border-radius:50%; animation:chatDot 1.2s infinite; }
+    .chat-dot:nth-child(2) { animation-delay:0.2s; }
+    .chat-dot:nth-child(3) { animation-delay:0.4s; }
+    @keyframes chatDot { 0%,80%,100%{transform:scale(0.7);opacity:0.5} 40%{transform:scale(1);opacity:1} }
 
     /* FOOTER */
     footer { background:var(--bg2); border-top:1px solid var(--border); color:var(--text2); text-align:center; padding:1.3rem; margin-top:2rem; font-size:0.8rem; line-height:1.8; }
@@ -195,12 +184,11 @@
     <button onclick="showPage('alertes',this)">📈 Trésorerie</button>
     <button onclick="showPage('relances',this)">📨 Relances</button>
     <button onclick="showPage('rapport',this)">📋 Rapport</button>
+    <button onclick="showPage('chatbot',this)">🤖 Chatbot</button>
   </div>
 </nav>
 
-<!-- ════════════════════════════════ -->
 <!-- PAGE 1 — ACCUEIL -->
-<!-- ════════════════════════════════ -->
 <div class="page active" id="page-accueil">
   <div class="hero">
     <h1>Smart<span>Flow</span> PME</h1>
@@ -208,69 +196,32 @@
     Sahal Tech Innovation Challenge 2026 — STIC'26 🇧🇫</p>
     <div class="hero-btns">
       <button class="btn btn-primary" onclick="showPage('credit',document.querySelectorAll('.nav-links button')[2])">💳 Scorer un crédit</button>
-      <button class="btn btn-secondary" onclick="showPage('fraude',document.querySelectorAll('.nav-links button')[3])">🚨 Détecter une fraude</button>
+      <button class="btn btn-secondary" onclick="showPage('chatbot',document.querySelectorAll('.nav-links button')[7])">🤖 Parler à l'assistant</button>
     </div>
   </div>
-
   <div class="cards">
     <div class="card"><div class="card-icon">🤖</div><h3>Précision IA</h3><div class="card-value">98%</div><p>Scoring crédit Random Forest</p></div>
     <div class="card"><div class="card-icon">🏢</div><h3>PME Cibles</h3><div class="card-value">67M+</div><p>PME sous-bancarisées Afrique</p></div>
     <div class="card"><div class="card-icon">📈</div><h3>Croissance</h3><div class="card-value">+34%</div><p>Mobile Money/an CEDEAO</p></div>
     <div class="card"><div class="card-icon">✅</div><h3>Tests</h3><div class="card-value">17/17</div><p>Tests unitaires passés</p></div>
   </div>
-
   <div class="section-title">🎯 Toutes les fonctionnalités</div>
   <div class="cards">
-    <div class="card" style="cursor:pointer" onclick="showPage('credit',document.querySelectorAll('.nav-links button')[2])">
-      <div class="card-icon">💳</div><h3>Scoring Crédit</h3>
-      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Décision IA instantanée</div>
-      <p>Analyse le profil financier et décide l'octroi de crédit.</p>
-    </div>
-    <div class="card" style="cursor:pointer" onclick="showPage('fraude',document.querySelectorAll('.nav-links button')[3])">
-      <div class="card-icon">🚨</div><h3>Détection Fraude</h3>
-      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Analyse temps réel</div>
-      <p>Détecte les transactions Mobile Money suspectes.</p>
-    </div>
-    <div class="card" style="cursor:pointer" onclick="showPage('alertes',document.querySelectorAll('.nav-links button')[4])">
-      <div class="card-icon">📈</div><h3>Alertes Trésorerie</h3>
-      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Prédiction 30 jours</div>
-      <p>Anticipe les crises de trésorerie à l'avance.</p>
-    </div>
-    <div class="card" style="cursor:pointer" onclick="showPage('relances',document.querySelectorAll('.nav-links button')[5])">
-      <div class="card-icon">📨</div><h3>Relances Auto</h3>
-      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Messages générés</div>
-      <p>Génère automatiquement les messages de relance.</p>
-    </div>
-    <div class="card" style="cursor:pointer" onclick="showPage('rapport',document.querySelectorAll('.nav-links button')[6])">
-      <div class="card-icon">📋</div><h3>Rapport Financier</h3>
-      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">KPIs complets</div>
-      <p>Rapport financier annuel avec indicateurs clés.</p>
-    </div>
-    <div class="card" style="cursor:pointer" onclick="showPage('dashboard',document.querySelectorAll('.nav-links button')[1])">
-      <div class="card-icon">📊</div><h3>Dashboard</h3>
-      <div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Temps réel</div>
-      <p>Vue globale des clients, crédits et alertes.</p>
-    </div>
+    <div class="card" style="cursor:pointer" onclick="showPage('credit',document.querySelectorAll('.nav-links button')[2])"><div class="card-icon">💳</div><h3>Scoring Crédit</h3><div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Décision IA instantanée</div><p>Analyse le profil financier et décide l'octroi de crédit.</p></div>
+    <div class="card" style="cursor:pointer" onclick="showPage('fraude',document.querySelectorAll('.nav-links button')[3])"><div class="card-icon">🚨</div><h3>Détection Fraude</h3><div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Analyse temps réel</div><p>Détecte les transactions Mobile Money suspectes.</p></div>
+    <div class="card" style="cursor:pointer" onclick="showPage('alertes',document.querySelectorAll('.nav-links button')[4])"><div class="card-icon">📈</div><h3>Alertes Trésorerie</h3><div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Prédiction 30 jours</div><p>Anticipe les crises de trésorerie à l'avance.</p></div>
+    <div class="card" style="cursor:pointer" onclick="showPage('relances',document.querySelectorAll('.nav-links button')[5])"><div class="card-icon">📨</div><h3>Relances Auto</h3><div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Messages générés</div><p>Génère automatiquement les messages de relance.</p></div>
+    <div class="card" style="cursor:pointer" onclick="showPage('rapport',document.querySelectorAll('.nav-links button')[6])"><div class="card-icon">📋</div><h3>Rapport Financier</h3><div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">KPIs complets</div><p>Rapport financier annuel avec indicateurs clés.</p></div>
+    <div class="card" style="cursor:pointer" onclick="showPage('chatbot',document.querySelectorAll('.nav-links button')[7])"><div class="card-icon">🤖</div><h3>Assistant IA</h3><div class="card-value" style="font-size:0.9rem;margin:0.4rem 0">Chatbot intelligent</div><p>Posez vos questions financières en langage naturel.</p></div>
   </div>
-
   <div class="section-title">👥 Équipe</div>
   <div class="cards">
-    <div class="card">
-      <div class="card-icon">👨‍💻</div><h3>Chef de Projet & Dev Backend</h3>
-      <div class="card-value" style="font-size:1rem">OUEDRAOGO Kevin</div>
-      <p>L1 Systèmes d'Information et Réseaux</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🤖</div><h3>Responsable IA & Automatisation</h3>
-      <div class="card-value" style="font-size:0.9rem">TAONDEYANDE W. Jean-Claude</div>
-      <p>L1 Systèmes d'Information et Réseaux</p>
-    </div>
+    <div class="card"><div class="card-icon">👨‍💻</div><h3>Chef de Projet & Dev Backend</h3><div class="card-value" style="font-size:1rem">OUEDRAOGO Kevin</div><p>L1 Systèmes d'Information et Réseaux</p></div>
+    <div class="card"><div class="card-icon">🤖</div><h3>Responsable IA & Automatisation</h3><div class="card-value" style="font-size:0.9rem">TAONDEYANDE W. Jean-Claude</div><p>L1 Systèmes d'Information et Réseaux</p></div>
   </div>
 </div>
 
-<!-- ════════════════════════════════ -->
 <!-- PAGE 2 — DASHBOARD -->
-<!-- ════════════════════════════════ -->
 <div class="page" id="page-dashboard">
   <div class="section-title">📊 Dashboard — Temps réel</div>
   <div class="stats-grid">
@@ -279,7 +230,6 @@
     <div class="stat-card"><div class="stat-val" id="stat-alertes">—</div><div class="stat-label">Alertes fraude</div></div>
     <div class="stat-card"><div class="stat-val" id="stat-transactions">—</div><div class="stat-label">Transactions</div></div>
   </div>
-
   <div class="section-title">👥 Clients</div>
   <div class="form-card">
     <div class="loading" id="loading-clients"><div class="spinner"></div>Chargement...</div>
@@ -288,7 +238,6 @@
       <tbody id="tbody-clients"><tr><td colspan="5" style="text-align:center;color:#555;padding:2rem">Cliquez sur Actualiser</td></tr></tbody></table>
     </div>
   </div>
-
   <div class="section-title">💳 Historique Crédits</div>
   <div class="form-card">
     <div class="table-wrap">
@@ -301,9 +250,7 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════ -->
 <!-- PAGE 3 — SCORING CRÉDIT -->
-<!-- ════════════════════════════════ -->
 <div class="page" id="page-credit">
   <div class="section-title">💳 Scoring Crédit IA</div>
   <div class="form-card">
@@ -342,9 +289,7 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════ -->
 <!-- PAGE 4 — FRAUDE -->
-<!-- ════════════════════════════════ -->
 <div class="page" id="page-fraude">
   <div class="section-title">🚨 Détection de Fraude Mobile Money</div>
   <div class="form-card">
@@ -375,61 +320,38 @@
       <div class="result-detail" id="result-fraude-detail"></div>
     </div>
   </div>
-
   <div class="section-title">📋 Alertes récentes</div>
   <div id="alertes-list"><p style="color:var(--text2);font-size:0.88rem">Actualisez le dashboard pour voir les alertes.</p></div>
 </div>
 
-<!-- ════════════════════════════════ -->
 <!-- PAGE 5 — ALERTES TRÉSORERIE -->
-<!-- ════════════════════════════════ -->
 <div class="page" id="page-alertes">
   <div class="section-title">📈 Alertes Trésorerie — Prédictions 30 jours</div>
   <div class="form-card">
     <div class="form-grid">
-      <div class="form-group">
-        <label>Nom de la PME</label>
-        <input type="text" id="alertes-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/>
-      </div>
+      <div class="form-group"><label>Nom de la PME</label><input type="text" id="alertes-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/></div>
     </div>
-    <div class="form-submit">
-      <button class="btn btn-primary" onclick="chargerAlertes()">📊 Analyser la trésorerie</button>
-    </div>
+    <div class="form-submit"><button class="btn btn-primary" onclick="chargerAlertes()">📊 Analyser la trésorerie</button></div>
   </div>
-
   <div class="loading" id="loading-alertes"><div class="spinner"></div>Analyse en cours...</div>
   <div id="alertes-result" style="display:none">
-
     <div class="stats-grid" id="alertes-stats"></div>
-
     <div class="section-title">🔔 Alertes détectées</div>
     <div id="alertes-items"></div>
-
     <div class="section-title">📉 Historique & Prédictions</div>
-    <div class="chart-wrap">
-      <div class="chart-title">Solde trésorerie (FCFA) — 90 jours historique + 30 jours prédiction</div>
-      <canvas id="chart-tresorerie" height="200"></canvas>
-    </div>
+    <div class="chart-wrap"><canvas id="chart-tresorerie" height="200"></canvas></div>
   </div>
 </div>
 
-<!-- ════════════════════════════════ -->
 <!-- PAGE 6 — RELANCES -->
-<!-- ════════════════════════════════ -->
 <div class="page" id="page-relances">
   <div class="section-title">📨 Relances Automatiques Clients</div>
   <div class="form-card">
     <div class="form-grid">
-      <div class="form-group">
-        <label>Nom de la PME</label>
-        <input type="text" id="relances-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/>
-      </div>
+      <div class="form-group"><label>Nom de la PME</label><input type="text" id="relances-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/></div>
     </div>
-    <div class="form-submit">
-      <button class="btn btn-primary" onclick="chargerRelances()">📨 Générer les relances</button>
-    </div>
+    <div class="form-submit"><button class="btn btn-primary" onclick="chargerRelances()">📨 Générer les relances</button></div>
   </div>
-
   <div class="loading" id="loading-relances"><div class="spinner"></div>Génération des messages...</div>
   <div id="relances-result" style="display:none">
     <div class="stats-grid" id="relances-stats"></div>
@@ -438,35 +360,76 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════ -->
 <!-- PAGE 7 — RAPPORT FINANCIER -->
-<!-- ════════════════════════════════ -->
 <div class="page" id="page-rapport">
   <div class="section-title">📋 Rapport Financier Annuel</div>
   <div class="form-card">
     <div class="form-grid">
-      <div class="form-group">
-        <label>Nom de la PME</label>
-        <input type="text" id="rapport-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/>
-      </div>
+      <div class="form-group"><label>Nom de la PME</label><input type="text" id="rapport-nom" placeholder="Ex: PME Kaboré & Frères" value="PME Kaboré & Frères"/></div>
     </div>
-    <div class="form-submit">
-      <button class="btn btn-primary" onclick="chargerRapport()">📋 Générer le rapport</button>
-    </div>
+    <div class="form-submit"><button class="btn btn-primary" onclick="chargerRapport()">📋 Générer le rapport</button></div>
   </div>
-
   <div class="loading" id="loading-rapport"><div class="spinner"></div>Génération du rapport...</div>
   <div id="rapport-result" style="display:none">
     <div class="section-title">📊 Indicateurs Clés (KPIs)</div>
     <div class="kpi-grid" id="rapport-kpis"></div>
-
     <div class="section-title">💰 Revenus vs Charges mensuels</div>
-    <div class="chart-wrap">
-      <canvas id="chart-mensuel" height="200"></canvas>
-    </div>
-
+    <div class="chart-wrap"><canvas id="chart-mensuel" height="200"></canvas></div>
     <div class="section-title">🤖 Recommandations IA</div>
     <div id="rapport-recommandations"></div>
+  </div>
+</div>
+
+<!-- PAGE 8 — CHATBOT -->
+<div class="page" id="page-chatbot">
+  <div class="section-title">🤖 Assistant IA SmartFlow</div>
+
+  <div class="form-card" style="margin-bottom:1rem">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Votre ID Client</label>
+        <input type="number" id="chat-client-id" placeholder="Ex: 1" min="1" value="1"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card" style="padding:0;overflow:hidden">
+    <div id="chat-messages" style="height:420px;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:0.8rem;">
+      <div class="chat-msg bot">
+        <div class="chat-bubble bot-bubble">
+          👋 Bonjour ! Je suis votre assistant financier SmartFlow PME.<br><br>
+          Je peux vous aider avec :<br>
+          • <strong>solde</strong> — consulter votre solde<br>
+          • <strong>crédit</strong> — demander un crédit<br>
+          • <strong>transaction</strong> — effectuer une transaction<br>
+          • <strong>fraude</strong> — vérifier les transactions suspectes<br>
+          • <strong>profil</strong> — voir votre segmentation client<br>
+          • <strong>prévention</strong> — alertes proactives<br>
+          • <strong>reporting</strong> — rapport complet
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:0.8rem;align-items:center;background:var(--bg3);">
+      <input type="text" id="chat-input"
+        placeholder="Tapez votre message... (ex: solde, crédit, fraude)"
+        style="flex:1;padding:0.7rem 1rem;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-size:0.92rem;outline:none;transition:border 0.2s;"
+        onfocus="this.style.borderColor='var(--orange)'"
+        onblur="this.style.borderColor='var(--border)'"
+        onkeydown="if(event.key==='Enter') envoyerMessage()"
+      />
+      <button class="btn btn-primary" onclick="envoyerMessage()">Envoyer ➤</button>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:0.8rem;color:var(--text2)">Suggestions :</span>
+    <button class="btn btn-secondary btn-sm" onclick="envoyerSuggestion('solde')">💰 Solde</button>
+    <button class="btn btn-secondary btn-sm" onclick="envoyerSuggestion('crédit')">💳 Crédit</button>
+    <button class="btn btn-secondary btn-sm" onclick="envoyerSuggestion('fraude')">🚨 Fraude</button>
+    <button class="btn btn-secondary btn-sm" onclick="envoyerSuggestion('profil')">👤 Profil</button>
+    <button class="btn btn-secondary btn-sm" onclick="envoyerSuggestion('prévention')">⚠️ Prévention</button>
+    <button class="btn btn-secondary btn-sm" onclick="envoyerSuggestion('reporting')">📊 Reporting</button>
   </div>
 </div>
 
@@ -482,7 +445,6 @@ const API = "http://127.0.0.1:8000";
 let chartTresorerie = null;
 let chartMensuel    = null;
 
-// ── Navigation ──────────────────────────────
 function showPage(name, btn) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.querySelectorAll(".nav-links button").forEach(b => b.classList.remove("active"));
@@ -491,7 +453,6 @@ function showPage(name, btn) {
   if (name === "dashboard") chargerDashboard();
 }
 
-// ── Dashboard ────────────────────────────────
 async function chargerDashboard() {
   document.getElementById("loading-clients").style.display = "block";
   try {
@@ -508,205 +469,126 @@ async function chargerDashboard() {
 
     document.getElementById("tbody-clients").innerHTML = clients.length === 0
       ? `<tr><td colspan="5" style="text-align:center;color:#555;padding:1.5rem">Aucun client</td></tr>`
-      : clients.map(c=>`<tr>
-          <td style="color:var(--text2)">#${c.id}</td>
-          <td><strong>${c.nom}</strong></td>
-          <td>${c.age} ans</td>
-          <td>${c.revenu.toLocaleString()} FCFA</td>
-          <td>${c.historique_credit}</td></tr>`).join("");
+      : clients.map(c=>`<tr><td style="color:var(--text2)">#${c.id}</td><td><strong>${c.nom}</strong></td><td>${c.age} ans</td><td>${c.revenu.toLocaleString()} FCFA</td><td>${c.historique_credit}</td></tr>`).join("");
 
     document.getElementById("tbody-credits").innerHTML = credits.length === 0
       ? `<tr><td colspan="6" style="text-align:center;color:#555;padding:1.5rem">Aucune demande</td></tr>`
-      : credits.map(c=>`<tr>
-          <td style="color:var(--text2)">#${c.id}</td>
-          <td>Client #${c.client_id}</td>
-          <td>${c.montant_demande.toLocaleString()} FCFA</td>
-          <td>${(c.score_credit*100).toFixed(0)}%</td>
-          <td><span class="badge ${c.decision==='Accepté'?'badge-green':'badge-red'}">${c.decision}</span></td>
-          <td>${new Date(c.date_demande).toLocaleDateString('fr-FR')}</td></tr>`).join("");
+      : credits.map(c=>`<tr><td style="color:var(--text2)">#${c.id}</td><td>Client #${c.client_id}</td><td>${c.montant_demande.toLocaleString()} FCFA</td><td>${(c.score_credit*100).toFixed(0)}%</td><td><span class="badge ${c.decision==='Accepté'?'badge-green':'badge-red'}">${c.decision}</span></td><td>${new Date(c.date_demande).toLocaleDateString('fr-FR')}</td></tr>`).join("");
 
     document.getElementById("alertes-list").innerHTML = alertes.length === 0
       ? `<p style="color:var(--text2);font-size:0.88rem">✅ Aucune alerte fraude.</p>`
-      : alertes.map(a=>`<div class="alert-item">
-          <div class="alert-title">🚨 Alerte #${a.id} — Client #${a.client_id}</div>
-          <div class="alert-msg">${a.message}</div>
-          <div class="alert-msg" style="font-size:0.78rem;margin-top:0.2rem">📅 ${new Date(a.date).toLocaleString('fr-FR')}</div>
-        </div>`).join("");
+      : alertes.map(a=>`<div class="alert-item"><div class="alert-title">🚨 Alerte #${a.id} — Client #${a.client_id}</div><div class="alert-msg">${a.message}</div><div class="alert-msg" style="font-size:0.78rem;margin-top:0.2rem">📅 ${new Date(a.date).toLocaleString('fr-FR')}</div></div>`).join("");
   } catch(e) {
-    document.getElementById("tbody-clients").innerHTML =
-      `<tr><td colspan="5" style="text-align:center;color:var(--red);padding:1.5rem">❌ API non connectée</td></tr>`;
+    document.getElementById("tbody-clients").innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--red);padding:1.5rem">❌ API non connectée</td></tr>`;
   }
   document.getElementById("loading-clients").style.display = "none";
 }
 
-// ── Crédit ───────────────────────────────────
 async function analyserCredit() {
-  const nom     = document.getElementById("credit-nom").value;
-  const age     = parseInt(document.getElementById("credit-age").value);
-  const revenu  = parseFloat(document.getElementById("credit-revenu").value);
-  const hist    = parseInt(document.getElementById("credit-historique").value)||0;
-  const ca      = parseInt(document.getElementById("credit-ca").value);
-  const ancien  = parseInt(document.getElementById("credit-anciennete").value)||1;
-  const employes= parseInt(document.getElementById("credit-employes").value)||1;
-  const retards = parseInt(document.getElementById("credit-retards").value)||0;
-  const dette   = parseInt(document.getElementById("credit-dette").value)||0;
-  const mobile  = parseInt(document.getElementById("credit-mobile").value)||0;
-  const secteur = document.getElementById("credit-secteur").value;
-  const montant = parseFloat(document.getElementById("credit-montant").value);
+  const nom=document.getElementById("credit-nom").value;
+  const age=parseInt(document.getElementById("credit-age").value);
+  const revenu=parseFloat(document.getElementById("credit-revenu").value);
+  const hist=parseInt(document.getElementById("credit-historique").value)||0;
+  const ca=parseInt(document.getElementById("credit-ca").value);
+  const employes=parseInt(document.getElementById("credit-employes").value)||1;
+  const retards=parseInt(document.getElementById("credit-retards").value)||0;
+  const dette=parseInt(document.getElementById("credit-dette").value)||0;
+  const mobile=parseInt(document.getElementById("credit-mobile").value)||0;
+  const secteur=document.getElementById("credit-secteur").value;
+  const montant=parseFloat(document.getElementById("credit-montant").value);
 
   if (!nom||!age||!revenu||!ca||!montant){alert("⚠️ Remplissez tous les champs !");return;}
 
-  document.getElementById("loading-credit").style.display = "block";
+  document.getElementById("loading-credit").style.display="block";
   document.getElementById("result-credit").classList.remove("show");
   try {
-    const clientRes = await fetch(`${API}/clients/`,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({nom,age,revenu,historique_credit:hist})});
-    const client = await clientRes.json();
-
-    const creditRes = await fetch(`${API}/credits/`,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({client_id:client.id,montant_demande:montant,secteur,
-        nb_employes:employes,retards_paiement:retards,montant_dette:dette,transactions_mobile:mobile})});
-    const credit = await creditRes.json();
-
-    const box = document.getElementById("result-credit");
+    const clientRes=await fetch(`${API}/clients/`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({nom,age,revenu,historique_credit:hist})});
+    const client=await clientRes.json();
+    const creditRes=await fetch(`${API}/credits/`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({client_id:client.id,montant_demande:montant,secteur,nb_employes:employes,retards_paiement:retards,montant_dette:dette,transactions_mobile:mobile})});
+    const credit=await creditRes.json();
+    const box=document.getElementById("result-credit");
     if (credit.decision==="Accepté") {
       box.className="result-box success show";
       document.getElementById("result-credit-title").innerHTML=`✅ Crédit ACCORDÉ — ${nom}`;
-      document.getElementById("result-credit-detail").innerHTML=`
-        Score IA : <strong style="color:var(--green)">${(credit.score_credit*100).toFixed(0)}%</strong><br>
-        Montant approuvé : <strong>${montant.toLocaleString()} FCFA</strong><br>
-        Secteur : <strong>${secteur}</strong>`;
+      document.getElementById("result-credit-detail").innerHTML=`Score IA : <strong style="color:var(--green)">${(credit.score_credit*100).toFixed(0)}%</strong><br>Montant approuvé : <strong>${montant.toLocaleString()} FCFA</strong><br>Secteur : <strong>${secteur}</strong>`;
     } else {
       box.className="result-box danger show";
       document.getElementById("result-credit-title").innerHTML=`❌ Crédit REFUSÉ — ${nom}`;
-      document.getElementById("result-credit-detail").innerHTML=`
-        Score IA : <strong style="color:var(--red)">${(credit.score_credit*100).toFixed(0)}%</strong><br>
-        Profil jugé trop risqué. Conseil : réduire les dettes et améliorer l'historique.`;
+      document.getElementById("result-credit-detail").innerHTML=`Score IA : <strong style="color:var(--red)">${(credit.score_credit*100).toFixed(0)}%</strong><br>Profil jugé trop risqué. Conseil : réduire les dettes et améliorer l'historique.`;
     }
   } catch(e){alert("❌ Erreur API !");}
   document.getElementById("loading-credit").style.display="none";
 }
 
-// ── Fraude ───────────────────────────────────
 async function analyserFraude() {
-  const clientId= parseInt(document.getElementById("fraude-client").value);
-  const montant = parseFloat(document.getElementById("fraude-montant").value);
-  const heure   = parseInt(document.getElementById("fraude-heure").value)||0;
-  const nb      = parseInt(document.getElementById("fraude-nb").value)||1;
-  const distance= parseInt(document.getElementById("fraude-distance").value)||0;
-  const nouveau = parseInt(document.getElementById("fraude-nouveau").value);
-  const echecs  = parseInt(document.getElementById("fraude-echecs").value)||0;
-  const type    = document.getElementById("fraude-type").value;
+  const clientId=parseInt(document.getElementById("fraude-client").value);
+  const montant=parseFloat(document.getElementById("fraude-montant").value);
+  const heure=parseInt(document.getElementById("fraude-heure").value)||0;
+  const nb=parseInt(document.getElementById("fraude-nb").value)||1;
+  const distance=parseInt(document.getElementById("fraude-distance").value)||0;
+  const nouveau=parseInt(document.getElementById("fraude-nouveau").value);
+  const echecs=parseInt(document.getElementById("fraude-echecs").value)||0;
+  const type=document.getElementById("fraude-type").value;
 
   if (!clientId||!montant){alert("⚠️ Remplissez tous les champs !");return;}
 
   document.getElementById("loading-fraude").style.display="block";
   document.getElementById("result-fraude").classList.remove("show");
   try {
-    const res = await fetch(`${API}/fraud/`,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({client_id:clientId,montant,heure_transaction:heure,
-        nb_transactions_jour:nb,distance_km:distance,nouveau_destinataire:nouveau,
-        echecs_recents:echecs,type_transaction:type})});
-    const data = await res.json();
-    const box  = document.getElementById("result-fraude");
-
+    const res=await fetch(`${API}/fraud/`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({client_id:clientId,montant,heure_transaction:heure,nb_transactions_jour:nb,distance_km:distance,nouveau_destinataire:nouveau,echecs_recents:echecs,type_transaction:type})});
+    const data=await res.json();
+    const box=document.getElementById("result-fraude");
     if (data.decision==="Fraude suspectée") {
       box.className="result-box danger show";
       document.getElementById("result-fraude-title").innerHTML=`🚨 FRAUDE DÉTECTÉE !`;
-      document.getElementById("result-fraude-detail").innerHTML=`
-        Risque : <strong style="color:var(--red)">${data.risque}</strong><br>
-        Action : <strong>${data.action}</strong><br>
-        Type : <strong>${type}</strong> — ${montant.toLocaleString()} FCFA`;
+      document.getElementById("result-fraude-detail").innerHTML=`Risque : <strong style="color:var(--red)">${data.risque}</strong><br>Action : <strong>${data.action}</strong><br>Type : <strong>${type}</strong> — ${montant.toLocaleString()} FCFA`;
     } else {
       box.className="result-box success show";
       document.getElementById("result-fraude-title").innerHTML=`✅ Transaction NORMALE`;
-      document.getElementById("result-fraude-detail").innerHTML=`
-        Risque : <strong style="color:var(--green)">${data.risque}</strong><br>
-        Transaction sans caractéristiques suspectes.`;
+      document.getElementById("result-fraude-detail").innerHTML=`Risque : <strong style="color:var(--green)">${data.risque}</strong><br>Transaction sans caractéristiques suspectes.`;
     }
   } catch(e){alert("❌ Erreur API !");}
   document.getElementById("loading-fraude").style.display="none";
 }
 
-// ── Alertes Trésorerie ───────────────────────
 async function chargerAlertes() {
-  const nom = document.getElementById("alertes-nom").value || "PME Test";
-  document.getElementById("loading-alertes").style.display = "block";
-  document.getElementById("alertes-result").style.display  = "none";
-
+  const nom=document.getElementById("alertes-nom").value||"PME Test";
+  document.getElementById("loading-alertes").style.display="block";
+  document.getElementById("alertes-result").style.display="none";
   try {
-    const data = await fetch(`${API}/ia/alertes-tresorerie/${encodeURIComponent(nom)}`).then(r=>r.json());
-
-    // Stats
-    const niveauColor = data.solde_actuel < 500000 ? "var(--red)"
-                      : data.solde_actuel < 1500000 ? "var(--yellow)"
-                      : "var(--green)";
-    document.getElementById("alertes-stats").innerHTML = `
+    const data=await fetch(`${API}/ia/alertes-tresorerie/${encodeURIComponent(nom)}`).then(r=>r.json());
+    const niveauColor=data.solde_actuel<500000?"var(--red)":data.solde_actuel<1500000?"var(--yellow)":"var(--green)";
+    document.getElementById("alertes-stats").innerHTML=`
       <div class="stat-card"><div class="stat-val" style="color:${niveauColor}">${(data.solde_actuel/1000000).toFixed(1)}M</div><div class="stat-label">Solde actuel (FCFA)</div></div>
       <div class="stat-card"><div class="stat-val">${(data.solde_moyen/1000000).toFixed(1)}M</div><div class="stat-label">Solde moyen (FCFA)</div></div>
-      <div class="stat-card"><div class="stat-val" style="color:${data.tendance<0?'var(--red)':'var(--green)'}">
-        ${data.tendance>0?'+':''}${(data.tendance/1000).toFixed(0)}K</div><div class="stat-label">Tendance/semaine</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:${data.tendance<0?'var(--red)':'var(--green)'}">${data.tendance>0?'+':''}${(data.tendance/1000).toFixed(0)}K</div><div class="stat-label">Tendance/semaine</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--yellow)">${(data.solde_predit/1000000).toFixed(1)}M</div><div class="stat-label">Solde prédit 30j</div></div>`;
-
-    // Alertes
-    document.getElementById("alertes-items").innerHTML = data.alertes.map(a => {
-      const cls = a.niveau.includes("DANGER") ? "" : a.niveau.includes("ALERTE") ? "warning" : "normal";
-      return `<div class="alert-item ${cls}">
-        <div class="alert-title">${a.niveau} — ${a.type}</div>
-        <div class="alert-msg">Valeur : ${a.valeur} | ${a.message}</div>
-      </div>`;
+    document.getElementById("alertes-items").innerHTML=data.alertes.map(a=>{
+      const cls=a.niveau.includes("DANGER")?"":a.niveau.includes("ALERTE")?"warning":"normal";
+      return `<div class="alert-item ${cls}"><div class="alert-title">${a.niveau} — ${a.type}</div><div class="alert-msg">Valeur : ${a.valeur} | ${a.message}</div></div>`;
     }).join("");
-
-    // Graphique
     if (chartTresorerie) chartTresorerie.destroy();
-    const histDates  = data.historique.map(d=>d.date.slice(5));
-    const histSoldes = data.historique.map(d=>d.solde/1000000);
-    const predDates  = data.prediction.map(d=>d.date.slice(5));
-    const predSoldes = data.prediction.map(d=>d.solde/1000000);
-
-    chartTresorerie = new Chart(document.getElementById("chart-tresorerie"),{
-      type:"line",
-      data:{
-        labels:[...histDates, ...predDates.slice(1)],
-        datasets:[
-          {label:"Historique 90j",data:[...histSoldes,...Array(predDates.length-1).fill(null)],
-           borderColor:"#3B82F6",backgroundColor:"rgba(59,130,246,0.1)",tension:0.3,fill:true,pointRadius:0},
-          {label:"Prédiction 30j",data:[...Array(histSoldes.length-1).fill(null),histSoldes[histSoldes.length-1],...predSoldes.slice(1)],
-           borderColor:"#F59E0B",backgroundColor:"rgba(245,158,11,0.1)",tension:0.3,fill:true,
-           borderDash:[6,3],pointRadius:0},
-        ]
-      },
-      options:{
-        responsive:true,
-        plugins:{legend:{labels:{color:"#A0A0A0",font:{size:11}}}},
-        scales:{
-          x:{ticks:{color:"#555",maxTicksLimit:12},grid:{color:"#2E2E2E"}},
-          y:{ticks:{color:"#A0A0A0",callback:v=>v+"M"},grid:{color:"#2E2E2E"}}
-        }
-      }
-    });
-
-    document.getElementById("alertes-result").style.display = "block";
-  } catch(e) { alert("❌ Erreur API — vérifiez que le serveur est lancé !"); }
-  document.getElementById("loading-alertes").style.display = "none";
+    const histDates=data.historique.map(d=>d.date.slice(5));
+    const histSoldes=data.historique.map(d=>d.solde/1000000);
+    const predDates=data.prediction.map(d=>d.date.slice(5));
+    const predSoldes=data.prediction.map(d=>d.solde/1000000);
+    chartTresorerie=new Chart(document.getElementById("chart-tresorerie"),{type:"line",data:{labels:[...histDates,...predDates.slice(1)],datasets:[{label:"Historique 90j",data:[...histSoldes,...Array(predDates.length-1).fill(null)],borderColor:"#3B82F6",backgroundColor:"rgba(59,130,246,0.1)",tension:0.3,fill:true,pointRadius:0},{label:"Prédiction 30j",data:[...Array(histSoldes.length-1).fill(null),histSoldes[histSoldes.length-1],...predSoldes.slice(1)],borderColor:"#F59E0B",backgroundColor:"rgba(245,158,11,0.1)",tension:0.3,fill:true,borderDash:[6,3],pointRadius:0}]},options:{responsive:true,plugins:{legend:{labels:{color:"#A0A0A0",font:{size:11}}}},scales:{x:{ticks:{color:"#555",maxTicksLimit:12},grid:{color:"#2E2E2E"}},y:{ticks:{color:"#A0A0A0",callback:v=>v+"M"},grid:{color:"#2E2E2E"}}}}});
+    document.getElementById("alertes-result").style.display="block";
+  } catch(e){alert("❌ Erreur API !");}
+  document.getElementById("loading-alertes").style.display="none";
 }
 
-// ── Relances ─────────────────────────────────
 async function chargerRelances() {
-  const nom = document.getElementById("relances-nom").value || "PME Test";
-  document.getElementById("loading-relances").style.display = "block";
-  document.getElementById("relances-result").style.display  = "none";
-
+  const nom=document.getElementById("relances-nom").value||"PME Test";
+  document.getElementById("loading-relances").style.display="block";
+  document.getElementById("relances-result").style.display="none";
   try {
-    const data = await fetch(`${API}/ia/relances/${encodeURIComponent(nom)}`).then(r=>r.json());
-
-    document.getElementById("relances-stats").innerHTML = `
+    const data=await fetch(`${API}/ia/relances/${encodeURIComponent(nom)}`).then(r=>r.json());
+    document.getElementById("relances-stats").innerHTML=`
       <div class="stat-card"><div class="stat-val">${data.total_clients}</div><div class="stat-label">Clients en retard</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--red)">${(data.total_montant_du/1000000).toFixed(1)}M</div><div class="stat-label">Total dû (FCFA)</div></div>`;
-
-    const colors = {"MISE EN DEMEURE":"badge-red","RELANCE FERME":"badge-orange","RELANCE STANDARD":"badge-yellow","RAPPEL DOUX":"badge-green"};
-
-    document.getElementById("relances-list").innerHTML = data.clients.map((c,i)=>`
+    const colors={"MISE EN DEMEURE":"badge-red","RELANCE FERME":"badge-orange","RELANCE STANDARD":"badge-yellow","RAPPEL DOUX":"badge-green"};
+    document.getElementById("relances-list").innerHTML=data.clients.map((c,i)=>`
       <div class="relance-card">
         <div class="relance-header">
           <div class="relance-nom">👤 ${c.nom}</div>
@@ -716,91 +598,103 @@ async function chargerRelances() {
             <span style="font-size:0.8rem;color:var(--orange);font-weight:600">${c.montant_du.toLocaleString()} FCFA</span>
           </div>
         </div>
-        <div style="font-size:0.82rem;color:var(--text2)">
-          ⏰ ${c.jours_retard} jours de retard &nbsp;|&nbsp; 📱 ${c.telephone}
-        </div>
-        <div style="margin-top:0.6rem">
-          <button class="btn btn-secondary btn-sm" onclick="toggleMessage('msg-${i}')">
-            📝 Voir le message
-          </button>
-        </div>
+        <div style="font-size:0.82rem;color:var(--text2)">⏰ ${c.jours_retard} jours de retard &nbsp;|&nbsp; 📱 ${c.telephone}</div>
+        <div style="margin-top:0.6rem"><button class="btn btn-secondary btn-sm" onclick="toggleMessage('msg-${i}')">📝 Voir le message</button></div>
         <div class="relance-message" id="msg-${i}">${c.message}</div>
       </div>`).join("");
-
-    document.getElementById("relances-result").style.display = "block";
-  } catch(e) { alert("❌ Erreur API !"); }
-  document.getElementById("loading-relances").style.display = "none";
+    document.getElementById("relances-result").style.display="block";
+  } catch(e){alert("❌ Erreur API !");}
+  document.getElementById("loading-relances").style.display="none";
 }
 
 function toggleMessage(id) {
-  const el = document.getElementById(id);
-  el.classList.toggle("show");
+  document.getElementById(id).classList.toggle("show");
 }
 
-// ── Rapport Financier ────────────────────────
 async function chargerRapport() {
-  const nom = document.getElementById("rapport-nom").value || "PME Test";
-  document.getElementById("loading-rapport").style.display = "block";
-  document.getElementById("rapport-result").style.display  = "none";
-
+  const nom=document.getElementById("rapport-nom").value||"PME Test";
+  document.getElementById("loading-rapport").style.display="block";
+  document.getElementById("rapport-result").style.display="none";
   try {
-    const data = await fetch(`${API}/ia/rapport/${encodeURIComponent(nom)}`).then(r=>r.json());
-    const k    = data.kpis;
-
-    // KPIs
-    document.getElementById("rapport-kpis").innerHTML = `
+    const data=await fetch(`${API}/ia/rapport/${encodeURIComponent(nom)}`).then(r=>r.json());
+    const k=data.kpis;
+    document.getElementById("rapport-kpis").innerHTML=`
       <div class="kpi-card"><div class="kpi-val">${(k.revenu_total/1000000).toFixed(1)}M</div><div class="kpi-label">💰 Revenu Total (FCFA)</div></div>
-      <div class="kpi-card"><div class="kpi-val" style="color:${k.benefice_total>0?'var(--green)':'var(--red)'}">
-        ${(k.benefice_total/1000000).toFixed(1)}M</div><div class="kpi-label">📈 Bénéfice Total</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="color:${k.benefice_total>0?'var(--green)':'var(--red)'}">${(k.benefice_total/1000000).toFixed(1)}M</div><div class="kpi-label">📈 Bénéfice Total</div></div>
       <div class="kpi-card"><div class="kpi-val">${k.marge_beneficiaire}%</div><div class="kpi-label">📊 Marge Bénéficiaire</div></div>
-      <div class="kpi-card"><div class="kpi-val" style="color:${k.solde_actuel<1000000?'var(--red)':k.solde_actuel<3000000?'var(--yellow)':'var(--green)'}">
-        ${(k.solde_actuel/1000000).toFixed(1)}M</div><div class="kpi-label">🏦 Solde Actuel</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="color:${k.solde_actuel<1000000?'var(--red)':k.solde_actuel<3000000?'var(--yellow)':'var(--green)'}">${(k.solde_actuel/1000000).toFixed(1)}M</div><div class="kpi-label">🏦 Solde Actuel</div></div>
       <div class="kpi-card"><div class="kpi-val">${k.nb_clients}</div><div class="kpi-label">👥 Clients</div></div>
-      <div class="kpi-card"><div class="kpi-val" style="color:${k.taux_recouvrement<60?'var(--red)':'var(--green)'}">
-        ${k.taux_recouvrement}%</div><div class="kpi-label">✅ Taux Recouvrement</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="color:${k.taux_recouvrement<60?'var(--red)':'var(--green)'}">${k.taux_recouvrement}%</div><div class="kpi-label">✅ Taux Recouvrement</div></div>
       <div class="kpi-card"><div class="kpi-val" style="font-size:1.1rem">${k.meilleur_mois}</div><div class="kpi-label">🌟 Meilleur Mois</div></div>
       <div class="kpi-card"><div class="kpi-val" style="font-size:1.1rem;color:var(--red)">${k.pire_mois}</div><div class="kpi-label">⚠️ Pire Mois</div></div>`;
-
-    // Graphique mensuel
     if (chartMensuel) chartMensuel.destroy();
-    chartMensuel = new Chart(document.getElementById("chart-mensuel"),{
-      type:"bar",
-      data:{
-        labels: data.mensuel.map(m=>m.mois),
-        datasets:[
-          {label:"Revenus",  data:data.mensuel.map(m=>m.revenus/1000000),  backgroundColor:"rgba(46,204,113,0.7)"},
-          {label:"Charges",  data:data.mensuel.map(m=>m.charges/1000000),  backgroundColor:"rgba(239,68,68,0.7)"},
-          {label:"Bénéfice", data:data.mensuel.map(m=>m.benefice/1000000), backgroundColor:"rgba(255,107,43,0.7)", type:"line", tension:0.3},
-        ]
-      },
-      options:{
-        responsive:true,
-        plugins:{legend:{labels:{color:"#A0A0A0",font:{size:11}}}},
-        scales:{
-          x:{ticks:{color:"#A0A0A0"},grid:{color:"#2E2E2E"}},
-          y:{ticks:{color:"#A0A0A0",callback:v=>v+"M"},grid:{color:"#2E2E2E"}}
-        }
-      }
-    });
-
-    // Recommandations IA
-    let reco = [];
-    if (k.marge_beneficiaire < 20) reco.push({icon:"⚠️",msg:"Marge faible — réduire les charges opérationnelles",cls:"warning"});
+    chartMensuel=new Chart(document.getElementById("chart-mensuel"),{type:"bar",data:{labels:data.mensuel.map(m=>m.mois),datasets:[{label:"Revenus",data:data.mensuel.map(m=>m.revenus/1000000),backgroundColor:"rgba(46,204,113,0.7)"},{label:"Charges",data:data.mensuel.map(m=>m.charges/1000000),backgroundColor:"rgba(239,68,68,0.7)"},{label:"Bénéfice",data:data.mensuel.map(m=>m.benefice/1000000),backgroundColor:"rgba(255,107,43,0.7)",type:"line",tension:0.3}]},options:{responsive:true,plugins:{legend:{labels:{color:"#A0A0A0",font:{size:11}}}},scales:{x:{ticks:{color:"#A0A0A0"},grid:{color:"#2E2E2E"}},y:{ticks:{color:"#A0A0A0",callback:v=>v+"M"},grid:{color:"#2E2E2E"}}}}});
+    let reco=[];
+    if (k.marge_beneficiaire<20) reco.push({icon:"⚠️",msg:"Marge faible — réduire les charges opérationnelles",cls:"warning"});
     else reco.push({icon:"✅",msg:"Marge saine — maintenir le cap",cls:"normal"});
-    if (k.solde_actuel < 1000000) reco.push({icon:"🔴",msg:"Trésorerie critique — action urgente requise",cls:""});
-    else if (k.solde_actuel < 3000000) reco.push({icon:"🟡",msg:"Trésorerie à surveiller",cls:"warning"});
+    if (k.solde_actuel<1000000) reco.push({icon:"🔴",msg:"Trésorerie critique — action urgente requise",cls:""});
+    else if (k.solde_actuel<3000000) reco.push({icon:"🟡",msg:"Trésorerie à surveiller",cls:"warning"});
     else reco.push({icon:"✅",msg:"Trésorerie saine",cls:"normal"});
-    if (k.taux_recouvrement < 60) reco.push({icon:"⚠️",msg:"Taux de recouvrement faible — activer les relances",cls:"warning"});
+    if (k.taux_recouvrement<60) reco.push({icon:"⚠️",msg:"Taux de recouvrement faible — activer les relances",cls:"warning"});
     else reco.push({icon:"✅",msg:"Recouvrement satisfaisant",cls:"normal"});
+    document.getElementById("rapport-recommandations").innerHTML=reco.map(r=>`<div class="alert-item ${r.cls}"><div class="alert-msg">${r.icon} ${r.msg}</div></div>`).join("");
+    document.getElementById("rapport-result").style.display="block";
+  } catch(e){alert("❌ Erreur API !");}
+  document.getElementById("loading-rapport").style.display="none";
+}
 
-    document.getElementById("rapport-recommandations").innerHTML = reco.map(r=>`
-      <div class="alert-item ${r.cls}">
-        <div class="alert-msg">${r.icon} ${r.msg}</div>
-      </div>`).join("");
+// ── CHATBOT ──────────────────────────────────
+function ajouterMessage(texte, type) {
+  const zone=document.getElementById("chat-messages");
+  const now=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  const div=document.createElement("div");
+  div.className=`chat-msg ${type}`;
+  div.innerHTML=`<div class="chat-bubble ${type}-bubble">${texte}</div><div class="chat-time">${now}</div>`;
+  zone.appendChild(div);
+  zone.scrollTop=zone.scrollHeight;
+}
 
-    document.getElementById("rapport-result").style.display = "block";
-  } catch(e) { alert("❌ Erreur API !"); }
-  document.getElementById("loading-rapport").style.display = "none";
+function ajouterLoading() {
+  const zone=document.getElementById("chat-messages");
+  const div=document.createElement("div");
+  div.className="chat-msg bot";
+  div.id="chat-loading";
+  div.innerHTML=`<div class="chat-loading"><div class="chat-dot"></div><div class="chat-dot"></div><div class="chat-dot"></div></div>`;
+  zone.appendChild(div);
+  zone.scrollTop=zone.scrollHeight;
+}
+
+function supprimerLoading() {
+  const el=document.getElementById("chat-loading");
+  if (el) el.remove();
+}
+
+async function envoyerMessage() {
+  const input=document.getElementById("chat-input");
+  const clientId=parseInt(document.getElementById("chat-client-id").value)||1;
+  const texte=input.value.trim();
+  if (!texte) return;
+  ajouterMessage(texte,"user");
+  input.value="";
+  ajouterLoading();
+  try {
+    const res=await fetch(`${API}/chatbot/`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({client_id:clientId,text:texte})
+    });
+    const data=await res.json();
+    supprimerLoading();
+    ajouterMessage(data.reply,"bot");
+  } catch(e) {
+    supprimerLoading();
+    ajouterMessage("❌ Erreur API — vérifiez que le serveur est lancé.","bot");
+  }
+}
+
+function envoyerSuggestion(texte) {
+  document.getElementById("chat-input").value=texte;
+  envoyerMessage();
 }
 </script>
 </body>
